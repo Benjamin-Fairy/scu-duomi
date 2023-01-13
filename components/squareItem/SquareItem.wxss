@@ -1,0 +1,135 @@
+@import "/app.wxss";
+
+
+
+/* 主要部分 */
+.main-container {
+    background-color: var(--bgcolor);
+}
+
+.card {
+    border-radius: 20rpx;
+    margin: 30rpx;
+}
+
+
+
+.no-card {
+    border-bottom: 1px solid #F2F3F4;
+    padding: 20rpx 0 0 0;
+}
+
+
+
+/******************头部样式**************************/
+.userInfoPart {
+    padding: 15rpx 20rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.avatarAndNickName {
+    display: flex;
+    align-items: center;
+    padding: 0 10rpx;
+}
+
+.nickNameAndDate {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10rpx;
+}
+
+.nickName {
+    font-size: 0.9rem;
+    font-weight: bolder;
+    max-width: 8rem;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.max-line {
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 5;
+}
+
+.date {
+    font-size: 0.6rem;
+    color: darkgrey;
+    line-height: 135%;
+}
+
+.ip-info {
+    font-size: 0.5rem;
+    color: grey;
+    line-height: 135%;
+}
+
+.more {
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* 气泡框 */
+.popover {
+    position: absolute;
+    top: calc(1rem + 10rpx);
+    right: calc(1.75rem + 20rpx);
+}
+
+.no-card-content {
+    margin-left: 2.6rem;
+}
+
+
+.hc {
+    background-color: #F2F3F4;
+}
+
+.img {
+    height: 120px;
+    width: 100%;
+    border-radius: 20rpx;
+}
+
+.single-img {
+    max-height: 160px;
+    max-width: 100%;
+}
+
+.img-container {
+    height: 120px;
+    width: 100%;
+}
+
+.actionPart {
+    color: #444;
+}
+
+/* 内容部分 */
+
+.text-content {
+    color: var(--textcolor);
+}
+
+.vote-item {
+    background-color: #F6F6F6;
+    padding: 8rpx 30rpx;
+    margin: 10rpx 0;
+    color: grey;
+    font-weight: bolder;
+    display: flex;
+    justify-content: space-between;
+}
+
+.vote-checked {
+    background-color: lightblue;
+}

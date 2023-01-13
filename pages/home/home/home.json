@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "主页",
+    "navigationStyle": "custom",
+    "usingComponents": {
+        "mp-half-screen-dialog": "/miniprogram_npm/weui-miniprogram/half-screen-dialog/half-screen-dialog"
+    },
+    "backgroundColor": "#ffffff"
+}

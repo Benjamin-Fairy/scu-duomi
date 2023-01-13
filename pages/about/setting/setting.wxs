@@ -1,0 +1,5 @@
+var formatDate = (function(date) {
+    var e = getDate(date);
+    return (e.getFullYear() + '年' + (e.getMonth() + 1) + '月' + e.getDay() + '日')
+});
+module.exports.formatDate = formatDate;

@@ -1,0 +1,16 @@
+<view style="text-align: center;padding-top: 20px;margin-bottom: 40px;">请完成以下验证码。</view>
+<view style="display: flex;">
+    <view style="margin: auto;position: relative;">
+        <view style="width: 280px;">
+            <image mode="widthFix" src="{{data.p}}"></image>
+        </view>
+        <image src="{{data.s}}" style="position: absolute;left: {{x-startX}}px;top: {{data.h}}px;width: 40px;height: 40px;"></image>
+        <view class="padding-tb" style="width: 280px;position: relative;">
+            <view style="background-color: #cec2c2;height: 40px;">
+                <view bindtouchend="moveend" bindtouchmove="move" bindtouchstart="movestart" class="flex justify-center align-center bg-white" style="width: 40px;height:40px;position: absolute;left: {{x-startX}}px;">
+                    <view class="cuIcon-right"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

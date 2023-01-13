@@ -1,0 +1,7 @@
+/* pages/register/register.wxss */
+.user_info_item {
+  background-color: #fff;
+  padding: 30rpx;
+  position: relative;
+  border-bottom: 1px solid #f2f3f4;
+}

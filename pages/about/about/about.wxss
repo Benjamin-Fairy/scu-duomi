@@ -1,0 +1,29 @@
+.UCenter-bg {
+    align-items: center;
+    background-image: url(https://image.weilanwl.com/color2.0/index.jpg);
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-weight: 300;
+    height: 700rpx;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: 40rpx;
+    position: relative;
+    text-shadow: 0 0 3px rgba(0,0,0,.3);
+}
+
+.UCenter-bg text {
+    opacity: .8;
+}
+
+.UCenter-bg image {
+    height: 250rpx;
+    width: 250rpx;
+}
+
+.UCenter-bg .animation-wave {
+    bottom: 0;
+    position: absolute;
+}

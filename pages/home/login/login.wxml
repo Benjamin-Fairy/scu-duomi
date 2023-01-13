@@ -1,0 +1,31 @@
+<view bindtap="back" class="back">
+    <text class="cuIcon-back_android " style="font-size:1.5rem;"></text>
+</view>
+<view class="flex justify-center align-center container">
+    <view class="flex justify-center align-center" style="width: 90%;background-color: white;height: 60%;border-radius: 30rpx;">
+        <form class="padding-lr">
+            <view class="text-bold text-center" style="font-size: 50rpx;">教务处登录</view>
+            <view class="margin-bottom-xl text-bold text-center flex justify-end" style="font-size: 30rpx;">—教务处的账号和密码</view>
+            <view class="cu-form-group margin-top">
+                <view class="title">学号：</view>
+                <input bindinput="bindinput" data-name="username" name="j_username" placeholder="在此输入学号！" value="{{username}}"></input>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">密码：</view>
+                <input bindinput="bindinput" data-name="password" name="j_password" placeholder="在此输入密码！" type="password" value="{{password}}"></input>
+            </view>
+            <view class="cu-form-group">
+                <view class="title">验证码：</view>
+                <input bindinput="bindinput" data-name="captcha" name="j_captcha" placeholder="在此输入验证码！" value="{{captcha}}"></input>
+                <view class="cu-capsule" style="padding-right:20rpx">
+                    <image bindtap="getCaptcha" id="captcha" mode="widthFix" src="{{img}}"></image>
+                </view>
+            </view>
+            <view class="text-xs text-grey flex justify-end">若持续出错，尝试点击验证码刷新 ~(￣▽￣)~* </view>
+            <view class="justify-center flex margin-top">
+                <button class="round cu-btn bg-red" disabled="{{logining}}" bindtap="login" style="width:5rem;">确定</button>
+                <button class="round cu-btn bg-blue margin-left" formType="reset" style="width:5rem;">重置</button>
+            </view>
+        </form>
+    </view>
+</view>

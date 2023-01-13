@@ -1,0 +1,255 @@
+.scroll-card {
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.tr {
+    border-bottom: 1px solid #f1f1f1;
+    flex-direction: row;
+    padding-bottom: 5px;
+    padding-top: 5px;
+
+}
+
+.td,.tr {
+    display: flex;
+}
+
+.td {
+    flex: 1;
+    justify-content: center;
+}
+
+.card-item {
+    text-align: center;
+    width: 100%;
+}
+
+.card-title {
+    font-family: 仿宋;
+    font-size: 1.6rem;
+    font-weight: bolder;
+    height: 50px;
+    line-height: 50px;
+}
+
+.card-body {
+    height: 320px;
+}
+
+.content {
+    font-family: 黑体;
+    font-size: 1.6rem;
+    margin: auto;
+}
+
+.card-close {
+    bottom: 10px;
+    font-size: 1.6rem;
+    height: 30px;
+    line-height: 30px;
+}
+
+.result-card {
+    background-color: #fff;
+    border-radius: 10px;
+    height: 400px;
+    text-align: center;
+    width: 130px;
+}
+
+.shade-container {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    padding-top: 60px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 999999;
+}
+
+.footer {
+    bottom: 30px;
+    position: absolute;
+    width: 100%;
+}
+
+.container {
+    height: 100vh;
+    width: 100%;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 2%;
+    height: 97%;
+    width: 96%;
+}
+
+.shade-layer {
+    background-color: #000;
+    height: 100%;
+    left: 0;
+    opacity: .2;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.animation-shake {
+    animation-duration: 2s;
+    animation-name: shake;
+    animation-timing-function: linear;
+}
+
+.animation-fade-in {
+    animation-name: fadein;
+    animation-timing-function: linear;
+}
+
+.animation-fade-in,.animation-slide-bottom {
+    animation-duration: .6s;
+}
+
+.animation-slide-bottom {
+    animation-name: slide-bottom;
+    animation-timing-function: linear;
+}
+
+@-webkit-keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    60% {
+        opacity: .4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+
+    60% {
+        opacity: .4;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes slide-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes shake {
+    0%,100% {
+        transform: rotateZ(0deg);
+    }
+
+    10% {
+        transform: rotateZ(20deg);
+    }
+
+    20% {
+        transform: rotateZ(-20deg);
+    }
+
+    30% {
+        transform: rotateZ(15deg);
+    }
+
+    40% {
+        transform: rotateZ(-15deg);
+    }
+
+    50% {
+        transform: rotateZ(10deg);
+    }
+
+    60% {
+        transform: rotateZ(-10deg);
+    }
+
+    70% {
+        transform: rotateZ(5deg);
+    }
+
+    80% {
+        transform: rotateZ(-5deg);
+    }
+
+    90% {
+        transform: rotateZ(1deg);
+    }
+}
+
+@keyframes shake {
+    0%,100% {
+        transform: rotateZ(0deg);
+    }
+
+    10% {
+        transform: rotateZ(20deg);
+    }
+
+    20% {
+        transform: rotateZ(-20deg);
+    }
+
+    30% {
+        transform: rotateZ(15deg);
+    }
+
+    40% {
+        transform: rotateZ(-15deg);
+    }
+
+    50% {
+        transform: rotateZ(10deg);
+    }
+
+    60% {
+        transform: rotateZ(-10deg);
+    }
+
+    70% {
+        transform: rotateZ(5deg);
+    }
+
+    80% {
+        transform: rotateZ(-5deg);
+    }
+
+    90% {
+        transform: rotateZ(1deg);
+    }
+}

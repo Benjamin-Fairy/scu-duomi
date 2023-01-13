@@ -1,0 +1,46 @@
+function indexOf(arr, arg) {
+  console.log(arg);
+  return (arr.indexOf(arg.toString()) > -1 || arr.indexOf(parseInt(arg)) > -1)
+};
+
+function calGrade(score) {
+  return score ? (score.toFixed(2)) : ''
+};
+
+function judgeStar(index, star) {
+  return (index <= star)
+};
+
+function getAvatarUrl(anonymous, url, gender) {
+  var cdnurl = "https://cdn.cypcc.cn/pennisetum/";
+  if (anonymous == 1 || !url) {
+    if (gender == 2) {
+      return (cdnurl + 'static/girl.png')
+    } else {
+      return (cdnurl + 'static/boy.png')
+    }
+  } else {
+    return (url)
+  }
+};
+var calTime = (function (time) {
+  var date = getDate(time);
+  var now = getDate();
+  var cha = getDate().getTime() - time;
+  if (cha < 60000) {
+    return (parseInt(cha / 1000) + "秒前")
+  } else if ((cha < 3600000)) {
+    return (parseInt(cha / 60000) + "分钟前")
+  } else if ((cha < 86400000)) {
+    return (parseInt(cha / 3600000) + "小时前")
+  } else if (date.getFullYear() == now.getFullYear()) {
+    return ((date.getMonth() + 1) + "月" + (date.getDate()) + "日")
+  } else {
+    return (date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + (date.getDate()) + "日")
+  }
+});
+module.exports.indexOf = indexOf;
+module.exports.calTime = calTime;
+module.exports.getAvatarUrl = getAvatarUrl;
+module.exports.judgeStar = judgeStar;
+module.exports.calGrade = calGrade;

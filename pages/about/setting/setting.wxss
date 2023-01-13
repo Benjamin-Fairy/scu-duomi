@@ -1,0 +1,109 @@
+page {
+    background-image: var(--gradualBlue);
+    overflow: hidden;
+    width: 100vw;
+}
+
+.DrawerPage {
+    background-color: #f1f1f1;
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    transition: all .4s;
+    width: 100vw;
+}
+
+.DrawerPage.show {
+    box-shadow: 0 0 60rpx rgba(0,0,0,.2);
+    left: 85vw;
+    transform: scale(.9,.9);
+    transform-origin: 0;
+}
+
+.DrawerWindow {
+    height: 100vh;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transform: scale(.9,.9) translateX(-100%);
+    transition: all .4s;
+    width: 85vw;
+}
+
+.DrawerWindow.show {
+    opacity: 1;
+    pointer-events: all;
+    transform: scale(1,1) translateX(0);
+}
+
+.DrawerClose {
+    align-items: flex-end;
+    background-image: linear-gradient(90deg,rgba(0,0,0,.01),rgba(0,0,0,.6));
+    color: transparent;
+    display: flex;
+    font-size: 50rpx;
+    height: 100vh;
+    justify-content: center;
+    letter-spacing: 5px;
+    opacity: 0;
+    padding-bottom: 30rpx;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all .4s;
+    width: 40vw;
+}
+
+.DrawerClose.show {
+    color: #fff;
+    opacity: 1;
+    pointer-events: all;
+    width: 15vw;
+}
+
+.DrawerPage .cu-bar.tabbar .action button.icon {
+    display: inline-block;
+    height: 64rpx;
+    line-height: 64rpx;
+    margin: 0;
+    width: 64rpx;
+}
+
+.DrawerPage .cu-bar.tabbar .action .cu-avatar {
+    margin: 0;
+}
+
+.DrawerPage .nav {
+    flex: 1;
+}
+
+.DrawerPage .nav .cu-item.cur {
+    border-bottom: 0;
+    position: relative;
+}
+
+.DrawerPage .nav .cu-item.cur::after {
+    background-color: currentColor;
+    border-radius: 10rpx;
+    bottom: 10rpx;
+    content: "";
+    height: 10rpx;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    width: 10rpx;
+}
+
+.DrawerPage .cu-bar.tabbar .action {
+    flex: initial;
+}
+
+.user_info_item {
+    background-color: #fff;
+    padding: 30rpx;
+    position: relative;
+}

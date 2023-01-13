@@ -1,0 +1,102 @@
+.title_bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.result-card {
+    background-color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 85vh;
+    width: 100vh;
+}
+
+.shade-layer {
+    background-color: #000;
+    height: 100%;
+    left: 0;
+    opacity: .2;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.shade-container {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.animation-slide-bottom {
+    animation-duration: .6s;
+    animation-name: slide-bottom;
+    animation-timing-function: linear;
+}
+
+@-webkit-keyframes slide-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-bottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.divLine {
+    width: 100%;
+}
+
+.divLine,.more {
+    text-align: center;
+}
+
+.more {
+    font-size: 1.2rem;
+    height: 100%;
+    padding-top: 20rpx;
+    width: 2rem;
+    z-index: 99999;
+}
+
+.line {
+    background: #e0e3da;
+    border-radius: 10%;
+    height: 1rpx;
+    margin-left: 10%;
+    width: 80%;
+}
+
+.charts {
+    height: 45vh;
+}
+
+.ec-canvas {
+    position: relative;
+}

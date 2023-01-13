@@ -1,0 +1,94 @@
+<view class="padding-sm">
+    <view class="flex justify-between solid-bottom align-center radius shadow bg-white margin-sm padding-sm" wx:if="{{mine}}">
+        <view class="flex  align-center">
+            <view style="margin-right:5rpx;">开启</view>
+            <switch bindchange="toggleOn" checked="{{mine.confirm==1?'true':''}}"></switch>
+        </view>
+        <view class="flex  align-center">
+            <view style="margin-right:5rpx;">提醒</view>
+            <switch bindchange="toggleInform" checked="{{mine.alert==1?'true':''}}" class="sm"></switch>
+        </view>
+        <view class="flex align-center">
+            <button bindtap="showModal" class="cu-btn round bg-gradual-purple round sm margin-left-sm" data-target="add">更新</button>
+            <button bindtap="del" class="cu-btn round bg-gradual-red sm margin-left-sm">删除</button>
+            <button bindtap="signin" class="cu-btn round bg-gradual-blue sm margin-left-sm">签到</button>
+        </view>
+    </view>
+    <view class="flex solid-bottom justify-center radius shadow bg-white margin-sm padding-sm" wx:else>
+        <button bindtap="showModal" class="cu-btn bg-blue flex small round" data-target="add">添加打卡账户</button>
+    </view>
+    <view class="flex solid-bottom align-center radius shadow bg-gradual-purple margin-sm" style="padding:0.8rem 0">
+        <text class="item" style="flex:4">时间</text>
+        <view class="item" style="flex:2">成功？</view>
+        <view class="item" style="flex:3">信息</view>
+    </view>
+    <view wx:if="{{mine.log.length>0}}">
+        <view class="flex solid-bottom align-center radius shadow bg-white margin-sm" style="padding:0.3rem 0.2rem" wx:for="{{mine.log}}" wx:key="key">
+            <text class="item" style="flex:4">{{tools.showSignInTime(item.date)}}</text>
+            <view class="item {{item.e==1?'text-red':''}}">{{item.e==1?'否':'是'}}</view>
+            <view class="item {{item.e==1?'text-red':''}}" style="flex:3">{{item.m}}</view>
+        </view>
+    </view>
+    <view wx:else>
+        <view class="flex solid-bottom padding align-center radius shadow bg-white margin-sm" style="text-align:center"> 没有打卡成功记录！ </view>
+    </view>
+</view>
+<view class="cu-modal {{modalName=='add'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">添加/更新账户</view>
+            <view bindtap="hideModal" class="action">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-top padding-bottom">
+            <form bindsubmit="add">
+                <view class="cu-form-group margin-top">
+                    <input model:value="{{user_username}}" name="username" placeholder="学号"></input>
+                </view>
+                <view class="cu-form-group">
+                    <input model:value="{{user_password}}" name="password" placeholder="密码" type="password"></input>
+                </view>
+                <button bindtap="add" class="cu-btn bg-blue" style="margin-top:20rpx">提交</button>
+                <view class="flex-sub text-center">
+                    <view class="solid-bottom text-xs padding">
+                        <text class="text-red">账号密码为四川大学微服务账号密码，如不清楚，请登录 https://ua.scu.edu.cn/login 找回密码或激活账号。</text>
+                    </view>
+                </view>
+            </form>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{modalName=='modal1'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">提醒</view>
+            <view bindtap="hideModal1" class="action">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl">
+            <view> 当每日身体状况，定位情况等 <text class="text-red" style="font-weight:bold">未发生改变时，</text> 每日将由本程序自动打卡。如果身体<text class="text-red" style="font-weight:bold">出现不适</text>，或者定位<text class="text-red" style="font-weight:bold">发生改变</text>，请在八点前及时到微服务公众号<text class="text-red" style="font-weight:bold">手动打卡</text>。 </view>
+            <view class="margin-top">自动打卡将使用前一天打卡的信息，所以当信息发生改变时，请务必及时到微服务手动打卡，更新信息。</view>
+            <view class="margin-top">请严格遵循此协议使用，如未按照本条款使用，造成的后果请自负。</view>
+            <view class="margin-top text-red">（此功能已被废除，请勿使用！）</view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{modalName=='initModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">打卡提醒</view>
+            <view bindtap="initAlert" class="action">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl">
+            <view>打卡日期：{{alert.date}}</view>
+            <view class="margin-top">打卡时间：{{alert.time}}</view>
+            <view class="margin-top">描述：{{alert.description}}</view>
+            <view></view>
+        </view>
+    </view>
+</view>
+<wxs module="tools" src="hpiUtils.wxs" />

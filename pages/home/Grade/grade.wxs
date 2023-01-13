@@ -1,0 +1,41 @@
+var getName = (function(num) {
+    switch (num) {
+        case "01":
+            return ("平时作业");
+        case "02":
+            return ("期中考试");
+        case "03":
+            return ("期末考试");
+        case "04":
+            return ("实验环节");
+        case "05":
+            return ("实践环节");
+        case "06":
+            return ("平时测验");
+        case "07":
+            return ("日常考勤");
+        case "08":
+            return ("课堂表现");
+        case "09":
+            return ("课程论文");
+        case "11":
+            return ("平时成绩");
+        default:
+            return ('未知项');
+    }
+});
+
+function indexOf(arr, value) {
+    if (arr.indexOf(value) < 0) {
+        return (false)
+    } else {
+        return (true)
+    }
+};
+
+function toFixed(num) {
+    return (num.toFixed(2))
+};
+module.exports.indexOf = indexOf;
+module.exports.toFixed = toFixed;
+module.exports.getName = getName;

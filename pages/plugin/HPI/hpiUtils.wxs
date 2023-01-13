@@ -1,0 +1,13 @@
+var showSignInTime = (function(time) {
+    var date = getDate(time);
+    if (date.getSeconds() < 10 && date.getMinutes() < 10) {
+        return ((date.getMonth() + 1) + "月" + (date.getDate()) + "日 " + date.getHours() + ":" + '0' + date.getMinutes() + ":" + '0' + date.getSeconds())
+    } else if (date.getSeconds() < 10) {
+        return ((date.getMonth() + 1) + "月" + (date.getDate()) + "日 " + date.getHours() + ":" + date.getMinutes() + ":" + '0' + date.getSeconds())
+    } else if (date.getMinutes() < 10) {
+        return ((date.getMonth() + 1) + "月" + (date.getDate()) + "日 " + date.getHours() + ":" + '0' + date.getMinutes() + ":" + date.getSeconds())
+    } else {
+        return ((date.getMonth() + 1) + "月" + (date.getDate()) + "日 " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds())
+    }
+});
+module.exports.showSignInTime = showSignInTime;

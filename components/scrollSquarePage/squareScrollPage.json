@@ -1,0 +1,7 @@
+{
+    "component": true,
+    "usingComponents": {
+        "squareItem": "/components/squareItem/SquareItem"
+    },
+    "enablePullDownRefresh": true
+}

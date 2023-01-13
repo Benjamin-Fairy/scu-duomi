@@ -1,0 +1,49 @@
+<scroll-view class="padding margin-top" style="padding-bottom:3rem;padding-top:0;">
+  <view class="cu-form-group">
+    <view class="title padding-left">教室选择</view>
+    <picker bindchange="MultiChange" bindcolumnchange="MultiColumnChange" mode="multiSelector" range="{{multiArray}}" value="{{multiIndex}}">
+      <view class="picker"> {{multiArray[0][ multiIndex[0] ]}}，{{multiArray[1][ multiIndex[1] ]}} </view>
+    </picker>
+  </view>
+  <view class="container text-center">
+    上次数据更新于{{updateTime}}
+  </view>
+  <view class="container">
+    <view class="table">
+      <view class="tr header">
+        <view class="td">教室</view>
+        <view class="td">一大节</view>
+        <view class="td">二大节</view>
+        <view class="td">三大节</view>
+        <view class="td">四大节</view>
+        <view class="td">五大节</view>
+      </view>
+      <view class="tr radius shadow bg-white" wx:for="{{roomdata}}" wx:for-index="index1" wx:for-item="item1" wx:key="key">
+        <view class="td" data-row="{{index}}" style="color:black">{{item1.roomName}}</view>
+        <view bindtap="showModal" class="td {{tools.color(item.use)}}" data-column="{{index}}" data-row="{{index1}}" data-target="Modal" wx:for="{{item1.classUse}}" wx:key="key"> {{tools.kcName(item.kcm)}}</view>
+      </view>
+    </view>
+  </view>
+  <view style="text-align:center;">
+    <button bindtap="refresh" class="cu-btn bg-gradual-green">手动更新教室信息</button>
+  </view>
+</scroll-view>
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">教室使用情况</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl ClassInfo">
+      <view class="detail">教室名称：{{ClassRoomDetail.className}}</view>
+      <view class="detail">教室座位：{{ClassRoomDetail.roomZws}}</view>
+      <view class="divLine"></view>
+      <view class="detail">节次：{{ClassRoomDetail.jc}}</view>
+      <view class="detail">使用状况：{{ClassRoomDetail.kcm}}</view>
+      <view class="detail">教师：{{ClassRoomDetail.jsm}}</view>
+    </view>
+  </view>
+</view>
+<wxs module="tools" src="classroomUtils.wxs" />

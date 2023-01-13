@@ -1,0 +1,45 @@
+{
+  "projectname": "%E8%AE%A9%E6%88%91%E6%9D%A5%E6%9C%B5%E8%9C%9C%E4%BD%A0%E5%90%A7",
+  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "setting": {
+    "compileHotReLoad": true,
+    "urlCheck": false,
+    "useIsolateContext": true
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": 1011
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": 1001
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
+          "scene": 1012
+        },
+        {
+          "name": "",
+          "pathName": "pages/home/home/home",
+          "query": "",
+          "launchMode": "default",
+          "scene": 1038,
+          "referrerInfo": {
+            "appId": "wx0fc3d70934908584",
+            "extraData": "{\"jscode\":\"001Fu4Ia1ulQWD0qOrHa1x7mhX3Fu4IX\"}"
+          }
+        }
+      ]
+    }
+  },
+  "libVersion": "2.27.1"
+}

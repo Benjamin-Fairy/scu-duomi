@@ -1,0 +1,46 @@
+#captcha {
+    height: auto;
+    width: 6rem;
+}
+
+.back {
+    left: 30rpx;
+    position: fixed;
+    top: 50rpx;
+}
+
+#title {
+    width: 100%;
+}
+
+.title {
+    padding-left: 20rpx;
+}
+
+.container {
+    animation: bganimation 15s infinite;
+    background-image: linear-gradient(125deg,#c1e3ff,#abc7ff,#8debff,#6cacff,#41d8dd,#5583ee);
+    background-size: 500%;
+    height: 100vh;
+    width: 100%;
+}
+
+@-webkit-keyframes bganimation {
+    0%,100% {
+        background-position: 0 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes bganimation {
+    0%,100% {
+        background-position: 0 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}

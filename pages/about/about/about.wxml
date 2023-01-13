@@ -1,0 +1,11 @@
+<view class="margin-xl bg-white padding-xl radius shadow-lg">
+    <view class="text-center margin-bottom text-lg  text-grey">关于此小程序</view>
+    <view class="text-content">
+        <view></view>
+        <view class="margin-top-sm"></view>
+        <view class="margin-top-sm">一个不知名的小程序</view>
+        <view class="margin-top-sm"></view>
+        <view class="margin-top-sm" style="width: 100%;text-align: center;">(๑❛ᴗ❛๑)۶</view>
+        <view class="margin-top-sm" style="width: 100%;text-align: center;">更多功能敬请期待！</view>
+    </view>
+</view>

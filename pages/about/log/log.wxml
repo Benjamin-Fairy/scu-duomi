@@ -1,0 +1,82 @@
+<view class="cu-timeline">
+    <view class="cu-item text-blue">
+        <view class="bg-blue content shadow">
+            <view class="cu-capsule radius">
+                <view class="cu-tag bg-white text-blue">v2.3.0</view>
+                <view class="cu-tag line-white">2021/12/20</view>
+            </view>
+            <view class="margin-top-sm text-content">
+                <text>寻课功能上线
+        </text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-item text-green">
+        <view class="bg-green content shadow">
+            <view class="cu-capsule radius">
+                <view class="cu-tag bg-white text-green">v2.2.0</view>
+                <view class="cu-tag line-white">2021/11/6</view>
+            </view>
+            <view class="margin-top-sm text-content">
+                <text>增加校车时刻表模块
+        </text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-item text-mauve">
+        <view class="bg-mauve content shadow">
+            <view class="cu-capsule radius">
+                <view class="cu-tag bg-white text-mauve">v2.1.0</view>
+                <view class="cu-tag line-white">2021/10/28</view>
+            </view>
+            <view class="margin-top-sm text-content">
+                <text>增加习题册答案模块
+        </text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-item text-cyan">
+        <view class="bg-cyan content shadow">
+            <view class="cu-capsule radius">
+                <view class="cu-tag bg-white text-cyan">v2.0.0</view>
+                <view class="cu-tag line-white">2021/7/23</view>
+            </view>
+            <view class="margin-top-sm text-content">
+                <text>2.0小程序全新上线
+        1、抢课功能上线
+          2、增加广场模块
+        </text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-item text-red">
+        <view class="bg-red content shadow">
+            <view class="cu-capsule radius">
+                <view class="cu-tag bg-white text-red">v1.2.0</view>
+                <view class="cu-tag line-white">2021/6/3</view>
+            </view>
+            <view class="margin-top-sm text-content">
+                <text>增加验证码识别模块
+        </text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-item text-blue">
+        <view class="bg-blue content shadow">
+            <view class="cu-capsule radius">
+                <view class="cu-tag bg-white text-blue">v1.1.0</view>
+                <view class="cu-tag line-white">2020/1/30</view>
+            </view>
+            <view class="margin-top-sm text-content">增加自动打卡功能（已废除）</view>
+        </view>
+    </view>
+    <view class="cu-item text-green">
+        <view class="bg-green content shadow">
+            <view class="cu-capsule radius">
+                <view class="cu-tag bg-white text-green">v1.0.0</view>
+                <view class="cu-tag line-white">2020/1/24</view>
+            </view>
+            <view class="margin-top-sm text-content">1.0小程序上线</view>
+        </view>
+    </view>
+</view>

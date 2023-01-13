@@ -1,0 +1,191 @@
+<scroll-view bindrefresherrefresh="refresh" class="padding" id="scroll" refresherEnabled="true" refresherTriggered="{{trigger}}" scrollY="true" style="padding-bottom:3rem;height:100vh;">
+    <view class="shadow-warp bg-white table" wx:for="{{score}}" wx:key="key">
+        <view class="header">
+            <view class="text-xl text-blold">{{item.cjlx}}</view>
+            <view class="justify-between flex padding-right padding-left padding-top text-df" style="width:100%;text-align:left;">
+                <view>总学分：{{item.zxf}}</view>
+                <view>必修学分：{{item.bxxf}}</view>
+            </view>
+            <view class="justify-between flex padding-right padding-left  text-df" style="width:100%;text-align:left;">
+                <view>平均绩点：{{tools.toFixed( (item.bxjd+item.xxjd)/item.zxf )}}</view>
+                <view>必修绩点：{{tools.toFixed(item.bxjd/item.bxxf)}}</view>
+            </view>
+            <view class="justify-between flex padding-right padding-left padding-bottom  text-df" style="width:100%;text-align:left;">
+                <view>平均成绩：{{tools.toFixed( (item.bxcj+item.xxcj)/item.zxf )}}</view>
+                <view>必修平均：{{tools.toFixed(item.bxcj/item.bxxf)}}</view>
+            </view>
+            <view class="tr">
+                <view class="th text-center" style="flex:4;padding-left:0.4rem;padding-right:1rem;">课程名称</view>
+                <view class="th text-center">成绩</view>
+                <view class="th text-center">学分</view>
+                <view class="th text-center">属性</view>
+                <view class="th text-center">绩点</view>
+            </view>
+        </view>
+        <view class="tbody" wx:for="{{score[index].cjList}}" wx:key="key">
+            <view bindtap="Focus" class="tr {{index%2==0?'bg-g':'bg-white'}} {{tools.indexOf(checked,item.courseName)?'checked':''}}" data-cj="{{item.cj}}" data-courseAttributeName="{{item.courseAttributeName}}" data-courseName="{{item.courseName}}" data-credit="{{item.credit}}" data-gradePointScore="{{item.gradePointScore}}" data-item="{{item}}" style="justify-content: space-between;">
+                <view class="td text-center" style="flex:4;padding-left:0.4rem;padding-right:1rem;"> {{item.courseName}} </view>
+                <view class="td text-center">{{item.cj}}</view>
+                <view class="td text-center">{{item.credit}}</view>
+                <view class="td text-center">{{item.courseAttributeName}}</view>
+                <view class="td text-center">{{item.gradePointScore}}</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<view class="box">
+    <view class="cu-bar tabbar bg-white">
+        <view bindtap="action" class="action" data-num="1" data-target="Modal" id="cal">
+            <view class="icon cuIcon-write {{num==1?'text-blue':'text-gray'}}" style="font-size:1.38rem;margin-bottom:0.1rem;"></view>
+            <view class="{{num==1?'text-blue':'text-gray'}}">计算</view>
+        </view>
+        <view bindtap="action" class="action" data-num="2" id="del">
+            <view class="icon cuIcon-delete {{num==2?'text-blue':'text-gray'}}" style="font-size:1.38rem;margin-bottom:0.1rem;"></view>
+            <view class="{{num==2?'text-blue':'text-gray'}}">清空</view>
+        </view>
+        <view bindtap="action" class="action" data-num="3" id="nec">
+            <view class="icon cuIcon-wenzi  {{num==3?'text-blue':'text-gray'}}" style="font-size:1.38rem;margin-bottom:0.1rem;"></view>
+            <view class="{{num==3?'text-blue':'text-gray'}}">必修</view>
+        </view>
+        <view bindtap="action" class="action" data-num="4" data-target="confirm" id="rang">
+            <view class="icon cuIcon-my {{num==4?'text-blue':'text-gray'}}" style="font-size:1.38rem;margin-bottom:0.1rem;"></view>
+            <view class="{{num==4?'text-blue':'text-gray'}}">成绩排名查询</view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">成绩计算</view>
+            <view bindtap="hideModal" class="action">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl">
+            <text>你共选择{{km}}门，共计{{credit}}学分
+</text>
+            <text>平均分为：{{avgcj}}，平均绩点为：{{avgjd}}</text>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{modalName=='rank'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">成绩详情查询</view>
+            <view bindtap="hideModal" class="action">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl">
+            <scroll-view enhanced="true" id="paiming-scroll" scrollWithAnimation="true" scrollY="true" showScrollbar="true" style="height:70vh;">
+                <view class="table">
+                    <view class="tr bg-blue">
+                        <view class="th" style="flex:2;">课程名称</view>
+                        <view class="th">成绩</view>
+                        <view class="th">最低</view>
+                        <view class="th">最高</view>
+                        <view class="th">平均</view>
+                        <view class="th">排名</view>
+                    </view>
+                    <block wx:if="{{rank[0].list.length>0}}">
+                        <view wx:for="{{rank[0].list}}" wx:key="key">
+                            <view class="tr bg-g" wx:if="{{index%2==0}}">
+                                <view class="td" style="flex:2;">{{item.courseName}}</view>
+                                <view class="td">{{item.courseScore==''?'未录入':item.courseScore}}</view>
+                                <view class="td">{{item.mincj==''?'未录入':item.mincj}}</view>
+                                <view class="td">{{item.maxcj==''?'未录入':item.maxcj}}</view>
+                                <view class="td">{{item.avgcj==''?'未录入':item.avgcj}}</view>
+                                <view class="td">{{item.rank==''?'未录入':item.rank}}</view>
+                            </view>
+                            <view class="tr" wx:else>
+                                <view class="td" style="flex:2;">{{item.courseName}}</view>
+                                <view class="td">{{item.courseScore==''?'未录入':item.courseScore}}</view>
+                                <view class="td">{{item.mincj==''?'未录入':item.mincj}}</view>
+                                <view class="td">{{item.maxcj==''?'未录入':item.maxcj}}</view>
+                                <view class="td">{{item.avgcj==''?'未录入':item.avgcj}}</view>
+                                <view class="td">{{item.rank==''?'未录入':item.rank}}</view>
+                            </view>
+                        </view>
+                    </block>
+                    <block wx:else> 当前还不能查询 o(╥﹏╥)o 期末再来吧 </block>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{modalName=='confirm'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">注意</view>
+            <view bindtap="hideModal" class="action">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl"> 本成绩来源为教务处未公布数据，请注意！ 仅在期末至学年初这段时间开放此API，如查询为空则此API关闭。 </view>
+        <view class="cu-bar bg-white justify-end">
+            <view class="action">
+                <button bindtap="hideModal" class="cu-btn line-green text-green margin-right">取消</button>
+                <button bindtap="confirm" class="cu-btn bg-green margin-left">确定</button>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{modalName=='detail'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">单科成绩查询</view>
+            <view bindtap="hideModal" class="action">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-xl">
+            <view>
+                <text>{{detail.kcmc}}
+</text>
+                <view class="table margin-top">
+                    <view class="thead">
+                        <view class="tr bg-blue">
+                            <view class="th">序号</view>
+                            <view class="th" style="flex:2">小分名称</view>
+                            <view class="th" style="flex:2">小分成绩</view>
+                        </view>
+                    </view>
+                    <view class="tbody" wx:for="{{detail.detail}}" wx:key="key">
+                        <view class="tr bg-g">
+                            <view class="td">{{index+1}} </view>
+                            <view class="td" style="flex:2">{{tools.getName(item.id.scoreSubItemCode)}}</view>
+                            <view class="td" style="flex:2">{{item.subItemScore}}</view>
+                        </view>
+                    </view>
+                    <view class="tr bg-g" wx:if="{{(detail.detail==null||detail.detail.length==0)&&detail!='当前不允许查看分项成绩！'}}">
+                        <view class="td" style="width:100%;text-align:center;"> 没有小分记录 </view>
+                    </view>
+                    <view class="tr bg-g" wx:if="{{detail=='当前不允许查看分项成绩！'}}">
+                        <view class="td" style="width:100%;text-align:center;"> 当前不允许查看分项成绩！ </view>
+                    </view>
+                    <view class="bg-g flex justify-end padding-right" style="width:100%"> 学分：{{detail.xf}} 绩点：{{detail.jd}} </view>
+                    <view class="bg-g flex justify-end padding-right" style="width:100%"> 总成绩:{{detail.cj}} </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{modalName=='xieyi'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">注意</view>
+        </view>
+        <view class="padding-xl" style="text-align: left;">
+            <view class="margin-bottom">
+                <text>　　在该页面中将展示部分<text class="red">隐私数据</text>，如你的成绩构成、排名等，这些信息来自于<text class="red">教务处未公开的API接口</text>，如果该接口被关闭，则将无法再得到该部分数据！</text>
+                <view></view>
+                <text>　　因此请<text class="red">不要使用该部分的数据主动与任课老师沟通</text>，也不要向任课老师透露这部分内容的存在，如果教务处关闭该接口，大家都将无法查询到该部分的内容。</text>
+            </view>
+            <view class="margin-top-xs" style="text-align: center;">
+                <button bindtap="tongyi" class="cu-btn bg-green">同意</button>
+                <button bindtap="butongyi" class="cu-btn bg-red margin-left">拒绝</button>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="tools" src="grade.wxs" />

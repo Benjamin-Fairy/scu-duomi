@@ -1,0 +1,16 @@
+var kcName = (function(val) {
+    if (val == null) {
+        return ('空')
+    } else {
+        return (val.substring(0, 1))
+    }
+});
+var color = (function(val) {
+    if (val == 1) {
+        return ('bg-gradual-red')
+    } else {
+        return ('bg-gradual-green')
+    }
+});
+module.exports.kcName = kcName;
+module.exports.color = color;

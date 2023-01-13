@@ -1,0 +1,103 @@
+<view bindtap="showSelectWeek" class="weekPicker" data-target="start">
+  <view class="picker"> {{weekNow!=''&&weekNow&&weekNow>-1||weekNow==0?'第'+(weekNow+1)+'周':'非行课'}} </view>
+</view>
+
+<view bindtap="addWeek" class="cuIcon-fold" style="position:fixed;right:2rem;bottom:7rem;z-index:9999;font-size:1.4rem;z-index:9"></view>
+<view bindtap="subWeek" class="cuIcon-unfold" style="position:fixed;right:2rem;bottom:2.15rem;z-index:9999;font-size:1.4rem;z-index:9"></view>
+<view>
+  <view class="top">
+    <view class="top-text" wx:for="{{['一','二','三','四','五','六','日']}}" wx:key="key">周{{item}}</view>
+  </view>
+  <scroll-view bindrefresherrefresh="fresh" class="scroll" refresherEnabled="true" refresherThreshold="200" refresherTriggered="{{trigger}}" scrollY="true">
+    <view style="width:730rpx;display:flex;">
+
+      <view class="week-bar" style="margin-top: -100vh;background-color:#c6dfa0;color:#7cba23;position: relative;width: 50rpx;">
+        <view style="height: 100vh;display: flex;justify-content: center;align-items: flex-end;">
+          
+        </view>
+        <view class="left padding-tb-xs" style="position: absolute;margin-top: {{index*110}}rpx;height: 110rpx;" wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="key">
+          <view>{{item}}</view>
+          <view style="font-size: 18rpx;color:green;line-height: 20rpx;">{{tools.handlePlanTime( planTime[index] )}}</view>
+        </view>
+      </view>
+      <view wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="key">
+        <view style="width:750rpx;margin-top:{{(index+1)*110}}rpx;position:absolute;border-bottom:2rpx solid lightgray;"></view>
+      </view>
+      <view wx:for="{{kclist}}" wx:for-index="index1" wx:for-item="item1" wx:key="key">
+        <view wx:for="{{item1.timeAndPlaceList}}" wx:key="key">
+          <view class="flex-item kcb-item" style="z-index: 9999;margin-left:{{(item.classDay-1)*100+5}}rpx;margin-top:{{(item.classSessions-1)*110+3}}rpx;height:{{item.continuingSession*110-5}}rpx;background:{{colorArray[ tools.rand() ]}};" wx:if="{{tools.isIn(item.weekDescription,weekNow)}}">
+            <view bindtap="showModal" class="smalltext" data-item="{{item}}" data-parentitem="{{item1}}" data-target="Modal">
+              <view style="font-weight: bolder;">{{item1.courseName}}
+              </view>
+              <view style="margin-top:{{(item.continuingSession-1)*6}}rpx"> {{item.teachingBuildingName+item.classroomName}}
+              </view>
+              <view style="margin-top:3rpx">{{item.weekDescription}}</view>
+            </view>
+          </view>
+          <view class="flex-item kcb-item  bg-grey light" style="margin-left:{{(item.classDay-1)*100+5}}rpx;margin-top:{{(item.classSessions-1)*110+3}}rpx;height:{{item.continuingSession*110-5}}rpx;" wx:else>
+            <view bindtap="showModal" class="smalltext" data-item="{{item}}" data-parentItem="{{item1}}" data-target="Modal" style="color:#8799a3">
+              <view style="font-weight: bolder;">{{item1.courseName}}
+              </view>
+              <view style="margin-top:{{(item.continuingSession-1)*6}}rpx"> {{item.teachingBuildingName+item.classroomName}}
+              </view>
+              <view style="margin-top:3rpx;">非本周</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">{{kcdetail.courseName}}</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="ClassContent">
+      <text>课程名称：{{kcdetail.courseName}}
+      </text>
+      <text>教师名称：{{kcdetail.attendClassTeacher}}
+      </text>
+      <text>课程号：{{kcdetail.coureNumber}}
+      </text>
+      <text>课序号：{{kcdetail.coureSequenceNumber}}
+      </text>
+      <text>教室：{{kcdetail.campusName+kcdetail.teachingBuildingName+kcdetail.classroomName}}
+      </text>
+      <text>考核类型：{{kcdetail.examTypeName}}
+      </text>
+      <text>学分：{{kcdetail.unit}}
+      </text>
+      <text>课程属性：{{kcdetail.coursePropertiesName}}
+      </text>
+      <text>开设校区：{{kcdetail.campusName}}
+      </text>
+      <text>上课周次：{{kcdetail.weekDescription}}</text>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='start'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">学期开始日选择</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="ClassContent">
+      <view class="cu-form-group">
+        <view class="title">日期选择</view>
+        <picker bindchange="DateChange" mode="date" start="2020-09-01" value="{{date}}">
+          <view class="picker"> {{date}} </view>
+        </picker>
+      </view>
+      <view class="flex justify-center margin-top">
+        <button bindtap="confirm" class="cu-btn bg-olive">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+<wxs module="tools" src="currUtils.wxs" />

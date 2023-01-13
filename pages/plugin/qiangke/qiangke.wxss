@@ -1,0 +1,28 @@
+.item {
+    flex: 1;
+    text-align: center;
+}
+
+.add_button {
+    border-radius: 50%;
+    bottom: 60rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    position: fixed;
+    right: 30rpx;
+    text-align: center;
+    width: 80rpx;
+    z-index: 9999;
+}
+
+.add_button>view {
+    font-size: 50rpx;
+    font-weight: 900;
+}
+
+.divLine {
+    background: #e0e3da;
+    height: 5rpx;
+    margin: .3rem 0;
+    width: 100%;
+}

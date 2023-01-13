@@ -1,0 +1,51 @@
+<view class="container">
+  <view class="table radius shadow-warp bg-white light margin padding-tb padding-lr-xl flex" style="margin-bottom: 0;justify-content: space-between;align-items: center;">
+    <text>一共{{list.length}}门课程</text>
+    <button bindtap="evalAll" class="cu-btn bg-blue">一键评教</button>
+  </view>
+  <scroll-view scrollY="true" style="height: 100vh;">
+    <view class="table radius shadow-warp bg-white light margin padding-tb padding-lr-xl">
+      <view class="tr">
+        <view class="td">序号</view>
+        <view class="td flex4">课程名称</view>
+        <view class="td flex2">教师</view>
+        <view class="td flex2">已评价?</view>
+        <view class="td">选择</view>
+      </view>
+      <view style="margin-top: 0.5rem;text-align: center;color: lightgray;" wx:if="{{list.length==0}}">
+        没有可评价的课程
+      </view>
+      <view wx:else>
+        <view class="tr" wx:for="{{list}}" wx:key="index">
+          <view class="td">{{index+1}}</view>
+          <view class="td flex4">{{item.KCM}}</view>
+          <view class="td flex2">{{item.LSRXM}}</view>
+          <view class="td flex2" wx:if="{{item.SFPG=='0'}}">
+            <text class="text-red">未评价</text>
+          </view>
+          <view class="td" wx:if="{{item.SFPG=='0'}}">
+            <checkbox bindtap="courseCheck" class="blue" data-item="{{item}}"></checkbox>
+          </view>
+          <view class="td flex3" wx:if="{{item.SFPG=='1'}}">
+            <text class="text-grey">已评价</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+<view class="cu-modal {{modalName=='modal1'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">提醒</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      <view>1、小程序将对选择的课程进行评价，评价皆为好评，具体评价内容可到教务处查看。</view>
+      <view class="margin-top">2、对于一些课程，请同学酌情到教务处进行手动评教，给老师提出建设性意见。</view>
+      <view class="margin-top">3、请同学们酌情使用。</view>
+    </view>
+  </view>
+</view>

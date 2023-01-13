@@ -1,0 +1,11 @@
+.item {
+    flex: 1;
+    text-align: center;
+}
+
+.divLine {
+    background: #e0e3da;
+    height: 5rpx;
+    margin: .3rem 0;
+    width: 100%;
+}

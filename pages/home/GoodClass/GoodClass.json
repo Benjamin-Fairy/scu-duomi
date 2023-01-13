@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "ec-canvas": "../../../ec-canvas/ec-canvas",
+        "mp-actionSheet": "/miniprogram_npm/weui-miniprogram/actionsheet/actionsheet"
+    },
+    "navigationBarTitleText": "寻课"
+}

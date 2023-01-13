@@ -1,0 +1,54 @@
+.table {
+    border: 0 solid #a9a9a9;
+    border-radius: 10rpx;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.color {
+    height: 25rpx;
+    width: 25rpx;
+}
+
+.tr {
+    margin: .3rem 0;
+    padding: .4rem 0;
+    width: 100%;
+}
+
+.td,.tr {
+    display: flex;
+}
+
+.td {
+    color: #fff;
+    flex: 1;
+    flex-direction: column;
+    margin: 0 .3rem;
+    text-align: center;
+}
+
+.divLine {
+    background: #e0e3da;
+    height: 5rpx;
+    margin: .3rem 0;
+    width: 100%;
+}
+
+.header {
+    background: #fff;
+    padding: .4rem 0;
+}
+
+.header .td {
+    background: #fff;
+    color: #000;
+}
+
+.ClassInfo {
+    text-align: left;
+}
+
+.detail {
+    margin: .4rem 0 .4rem 3rem;
+}

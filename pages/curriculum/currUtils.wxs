@@ -1,0 +1,38 @@
+var rand = (function () {
+  return (Math.floor(Math.random() * 8))
+});
+var handlePlanTime = (function (str) {
+  if (!str) return null
+  var a = str.split('-');
+  return (a[(0)] + '\n' + a[(1)])
+});
+var isIn = (function (weekDescription, weekNow) {
+  if (parseInt(weekDescription.split("-")[(0)]) <= (parseInt(weekNow) + 1) && parseInt(weekDescription.split("-")[(1)]) >= (parseInt(weekNow) + 1)) {
+    if ((weekDescription.charAt(weekDescription.length - 1)) == "单") {
+      if ((parseInt(weekNow) + 1) % 2 == 0) {
+        return (false)
+      } else {
+        return (true)
+      }
+    } else if ((weekDescription.charAt(weekDescription.length - 1)) == "双") {
+      if ((parseInt(weekNow) + 1) % 2 == 0) {
+        return (true)
+      } else {
+        return (false)
+      }
+    } else {
+      return (true)
+    }
+  } else if ((weekDescription.charAt(weekDescription.length - 1)) == "上") {
+    if (weekDescription.substring(0, weekDescription.length - 2).split(",").indexOf((parseInt(weekNow) + 1) + "") != -1) {
+      return (true)
+    } else {
+      return (false)
+    }
+  } else {
+    return (false)
+  }
+});
+module.exports.isIn = isIn;
+module.exports.rand = rand;
+module.exports.handlePlanTime = handlePlanTime;

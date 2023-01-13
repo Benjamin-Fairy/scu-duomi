@@ -1,0 +1,64 @@
+<scroll-view scrollY="true" style="height: 100vh;overflow-y: scroll;">
+  <view class="UCenter-bg" wx:if="{{!userInfo||!userInfo.uid||userInfo.uid==0||userInfo.uid==1}}">
+    <view class="cu-avatar round margin-left bg-green xl">
+      <text class="cuIcon-emoji xl avatar-default"></text>
+    </view>
+    <button bindtap="getUserInfo" style="font-size:0.8rem;margin-top:1rem">点此登录</button>
+  </view>
+  <view class="UCenter-bg" wx:else>
+    <view bindtap="goToSetting" class="cu-avatar xxl round margin-left" style="background-image:url({{userInfo.avatarUrl}});"></view>
+    <view class="text-xl margin-top-sm"> {{userInfo.nickName}} </view>
+  </view>
+  <view class="cu-list menu card-menu margin-top margin-bottom-xl shadow-lg radius">
+    <view class="cu-item arrow">
+      <navigator class="content" hoverClass="none" url="/pages/about/setting/setting">
+        <text class="cuIcon-settings text-black"></text>
+        <text class="text-grey">设置</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <view class="content" hoverClass="none" bindtap="scan">
+        <text class="cuIcon-scan text-pink"></text>
+        <text class="text-grey">扫一扫</text>
+      </view>
+    </view>
+
+    <view class="cu-item arrow">
+      <navigator class="content" hoverClass="none" url="/pages/about/about/about">
+        <text class="cuIcon-emoji text-purple"></text>
+        <text class="text-grey">关于此小程序</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <navigator class="content" hoverClass="none" url="/pages/about/log/log">
+        <text class="cuIcon-formfill text-green"></text>
+        <text class="text-grey">日志</text>
+      </navigator>
+    </view>
+    <view class="cu-item arrow">
+      <button class="content cu-btn" openType="contact">
+        <text class="cuIcon-servicefill text-orange"></text>
+        <text class="text-grey">客服</text>
+      </button>
+    </view>
+  
+  </view>
+  <view style="text-align: center;">{{accountInfo.miniProgram.version}}</view>
+  <view class="cu-tabbar-height"></view>
+</scroll-view>
+
+<view bindtap="hideModal" class="cu-modal bottom-modal {{modalName=='money'?'show':''}}">
+  <view catchtap class="cu-dialog">
+    <view class="cu-bar bg-white justify-between">
+      <view class="margin-left-xl" style="font-family: 楷体;font-size: larger;"></view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="grid col-3 padding-sm">
+      <view class="padding-xs" wx:for="{{checkbox}}" wx:key="index">
+        <button bindtap="tips" class="cu-btn orange lg block {{item.checked?'bg-orange':'line-orange'}}" data-value="{{item.value}}"> {{item.name}} </button>
+      </view>
+    </view>
+  </view>
+</view>

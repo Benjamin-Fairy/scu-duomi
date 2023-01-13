@@ -1,0 +1,128 @@
+<view class="container flex justify-center align-center">
+  <view class="card">
+    <view class="padding-lr-xl margin-top-xl" style="width:100%;text-align:center;font-size:1.5rem;font-family: '黑体';"> {{itemList[currentItemList].name}} </view>
+    <view class="flex justify-center align-center margin-top-xl" style="height:45vh;">
+      <lucky-wheel id="myLucky" width="600rpx" height="600rpx" blocks="{{blocks}}" prizes="{{prizes}}" buttons="{{buttons}}" bindstart="start" bindend="end" />
+    </view>
+    <view style="height:1.7rem;margin-bottom:40px;">
+      <view class="padding-lr-xl" style="width:100%;text-align:center;font-size:1.5rem;font-family:'黑体';" wx:if="{{showOnScreen}}"> {{result}} </view>
+    </view>
+    <view class="footer flex justify-center" style="flex-direction:row;">
+      <view bindtap="showModal" data-target="itemList">
+        <text class="cuIcon-sort lg text-gray"></text>
+        <text class="text-gray" decode="true">&nbsp;&nbsp;选择</text>
+      </view>
+      <text class="text-gray" decode="true">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</text>
+      <view bindtap="showModal" data-target="editItem">
+        <text class="cuIcon-post lg text-gray"></text>
+        <text class="text-gray" decode="true">&nbsp;&nbsp;编辑词条</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='itemList'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">选择</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding">
+      <scroll-view class="scroll-card" enhanced="true" scrollWithAnimation="true" scrollY="true" showScrollbar="true" style="height:60vh;">
+        <view>
+          <view class="tr">
+            <view class="td">序号</view>
+            <view class="td" style="flex:3;">名称</view>
+            <view class="td">选择</view>
+            <view class="td">删除</view>
+          </view>
+          <view class="tr" wx:for="{{itemList}}" wx:key="index">
+            <view class="td">
+              <text class="cuIcon-title text-orange "></text>{{index+1}}
+            </view>
+            <view class="td" style="flex:3;">{{item.name}}</view>
+            <view class="td">
+              <button bindtap="chooseItemList" class="cu-btn bg-green sm" data-id="{{index}}">选择</button>
+            </view>
+            <view class="td">
+              <button bindtap="delFromItemList" class="cu-btn bg-red sm" data-id="{{index}}">删除</button>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="margin-top-xl" style="width:100%;text-align:center;">
+        <button bindtap="showModalSub" class="cu-btn bg-blue" data-target="addToItemList">添加一个</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='editItem'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">编辑词条</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding">
+      <scroll-view class="scroll-card" enhanced="true" scrollWithAnimation="true" scrollY="true" showScrollbar="true" style="height:60vh;">
+        <view>
+          <view class="tr">
+            <view class="td">序号</view>
+            <view class="td" style="flex:3;">名称</view>
+            <view class="td">删除</view>
+          </view>
+          <view class="tr" wx:for="{{itemList[currentItemList].item}}" wx:key="index">
+            <view class="td">
+              <text class="cuIcon-title text-blue "></text>{{index+1}}
+            </view>
+            <view class="td" style="flex:3;">{{item}}</view>
+            <view class="td">
+              <button bindtap="delFromItem" class="cu-btn bg-red sm" data-id="{{index}}">删除</button>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="margin-top-xl" style="width:100%;text-align:center;">
+        <button bindtap="showModalSub" class="cu-btn bg-blue" data-target="addToItem">添加一个</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalNameSub=='addToItemList'?'show':''}} " wx:if="{{modalNameSub=='addToItemList'}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">添加</view>
+      <view bindtap="hideModalSub" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding">
+      <view style="width:100%;text-align:center;">
+        <view class="cu-form-group margin-top">
+          <input bindinput="input" data-target="ItemListName" name="ItemListName" placeholder="名称" value="{{ItemListName}}"></input>
+        </view>
+        <button bindtap="add" class="cu-btn bg-blue" data-target="ItemListName" style="margin-top:20rpx">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalNameSub=='addToItem'?'show':''}}" wx:if="{{modalNameSub=='addToItem'}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">添加</view>
+      <view bindtap="hideModalSub" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding">
+      <view style="width:100%;text-align:center;">
+        <view class="cu-form-group margin-top">
+          <input bindinput="input" data-target="itemName" name="itemName" placeholder="名称" value="{{itemName}}"></input>
+        </view>
+        <button bindtap="add" class="cu-btn bg-blue" data-target="itemName" style="margin-top:20rpx">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

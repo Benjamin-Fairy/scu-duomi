@@ -1,0 +1,75 @@
+<view>
+  <view style="background-color: white;font-size:2rem;font-weight: bold;text-align: center;border-bottom: 1px solid #f2f3f4;">注册</view>
+  <!-- 头像 -->
+  <view class="user_info_item text-center">
+    <view class="cu-avatar xl round margin-left" style="background-image:url('{{avatarUrl}}');">
+    </view>
+    <view>
+      <button class="cu-btn bg-green sm margin-top" bindtap="showAvatar">
+        选择头像
+      </button>
+    </view>
+  </view>
+
+  <!-- 昵称 -->
+  <view class="user_info_item flex justify-between">
+    <view style="flex: 1;">昵称</view>
+    <view style="flex: 3;">
+      <view style="display: flex;justify-content: space-between;">
+        <input placeholder="在此输入昵称" model:value="{{nickName}}" type="text" />
+        <view style="color: grey;font-size: 0.8rem;" bindtap="getNickName">
+          随机昵称
+          <van-icon name="replay" />
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 性别 -->
+  <view class="user_info_item flex justify-between">
+    <view style="flex: 1;">性别</view>
+    <view style="flex: 3;">
+      <radio-group bindchange="radioChange">
+        <radio value="1"></radio> 男
+        <radio value="2"></radio> 女
+      </radio-group>
+    </view>
+  </view>
+
+  <!-- 确认按钮 -->
+  <view class="user_info_item flex justify-center">
+    <button class="cu-btn bg-green" bindtap="confirm"> 注册</button>
+  </view>
+
+</view>
+<!-- 昵称修改弹窗 -->
+<view class="cu-modal show" wx:if="{{modalName=='avatar'}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">选择头像</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="valueContent bg-white">
+      <view style="border-bottom:1px solid #f2f3f4;text-align: left;padding-left: 1rem;font-size: 1.4rem;color: #020304;">♂</view>
+      <view style="display: flex;flex-wrap: wrap;padding-top: 10px;">
+        <view wx:for="{{8}}" wx:key="index">
+          <view bindtap="chooseAvatar" data-gender='boy' data-index="{{index+1}}" class="cu-avatar xl round margin-left" style="background-image:url('https://duomi.chenyipeng.com/static/avatar/boy-{{index+1}}.png');">
+          </view>
+        </view>
+      </view>
+
+      <view style="border-bottom:1px solid #f2f3f4;text-align: left;padding-left: 1rem;font-size: 1.4rem;color: #020304;">♀</view>
+      <view style="display: flex;flex-wrap: wrap;padding: 10px 0;">
+        <view wx:for="{{8}}" wx:key="index">
+          <view bindtap="chooseAvatar" data-gender='girl' data-index="{{index+1}}" class="cu-avatar xl round margin-left" style="background-image:url('https://duomi.chenyipeng.com/static/avatar/girl-{{index+1}}.png');">
+          </view>
+        </view>
+      </view>
+
+      <view style="padding:10px 0;font-size: 0.8rem;">后续可以在个人界面，手动上传头像修改~</view>
+
+    </view>
+  </view>
+</view>

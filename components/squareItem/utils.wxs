@@ -1,0 +1,7 @@
+var remainTime = function (second) {
+    var hours = parseInt(second / 3600);
+    var minutes = parseInt((second - hours * 3600) / 60)
+    return hours + "小时" + minutes + "分"
+}
+
+module.exports.remainTime = remainTime

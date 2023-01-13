@@ -1,0 +1,208 @@
+<!-- 主要内容 -->
+<scroll-view scrollY class="DrawerPage {{modalName=='viewModal'?'show':''}}">
+  <view class="text-center" style="position: fixed; bottom: 10px;left:10px">
+    <view bindtap="showModal" class="cu-btn bg-green lg block shadow radius" data-target="viewModal"> 菜单 </view>
+  </view>
+  <!-- 个人信息修改 -->
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg padding-top-xl" wx:if="{{TabCur==0}}">
+    <view class="flex justify-end" style="width: 100%;text-align: center;">
+      <text style="font-size: 1.5rem;font-weight: bolder;font-family: 'Courier New', Courier, monospace;">个人信息</text>
+    </view>
+    <view bindtap="showModal" data-target="avatar" class=" margin-top-xl user_info_item text flex justify-between margin-top-xl">
+      <view class="title">头像</view>
+      <view class="cu-avatar xl round margin-left" style="background-image:url('{{user.avatarUrl}}');"></view>
+    </view>
+    <view bindtap="showModal" class="user_info_item text flex justify-between" data-disabled="{{true}}" data-target="nickname">
+      <view class="title">ID:</view>
+      <view class="margin-left">{{user.uid}} </view>
+    </view>
+    <view bindtap="showModal" class="user_info_item text flex justify-between" data-disabled="{{false}}" data-target="nickname">
+      <view class="title">昵称：</view>
+      <view class="margin-left">{{user.nickName}} </view>
+    </view>
+    <view bindtap="showModal" class="user_info_item text flex justify-between" data-disabled="{{false}}" data-target="genderChoose">
+      <view class="title">性别：</view>
+      <view class="margin-left"> {{user.gender==1?'男':user.gender==2?'女':'未知'}}</view>
+    </view>
+    <view bindtap="showModal" class="user_info_item text flex justify-between" data-target="email">
+      <view class="title">邮箱：</view>
+      <view class="margin-left"> {{user.email?user.email:'空'}}</view>
+    </view>
+    <view class="padding margin text-center">
+      <view bindtap="updateUserInfo" class="cu-btn {{canSubmit?'bg-green':'bg-grey'}} lg block shadow radius margin-xl "> 确定 </view>
+    </view>
+  </view>
+  <!-- 校务处信息修改 -->
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg" wx:if="{{TabCur==1}}">
+    <view class="margin-top-xl margin-bottom-xl" style="text-align:center;">
+      <image mode="widthFix" src="/images/jw_logo.jpg"></image>
+    </view>
+    <view class="margin-top-xl user_info_item text flex">
+      <view class="title" style="width: 20%;">学号：</view>
+      <input bindinput="jwcUsernameInput" style="width: 80%;" value="{{scu_jwc_username}}"></input>
+    </view>
+    <view class="user_info_item text flex">
+      <view class="title" style="width: 20%;">密码：</view>
+      <input bindinput="jwcPasswordInput" style="width: 80%;" type="password" value="{{scu_jwc_password}}"></input>
+    </view>
+    <view class="padding margin text-center">
+      <view bindtap="changeJwcInfo" class="cu-btn bg-green lg block shadow radius margin-xl "> 修改 </view>
+      <view bindtap="delJwcInfo" class="margin-left-xl cu-btn bg-red lg block shadow radius margin-xl "> 删除账号 </view>
+    </view>
+  </view>
+  <!-- 校区信息修改 -->
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg" wx:if="{{TabCur==2}}">
+    <view class="flex justify-end" style="width: 100%;text-align: center;">
+      <text style="font-size: 1.5rem;font-weight: bolder;font-family: 'Courier New', Courier, monospace;">校区修改</text>
+    </view>
+    <radio-group bindchange="campusChange" class="block">
+      <view class="cu-form-group margin-top">
+        <view class="title margin-left">望江校区</view>
+        <radio checked="{{campus=='wangjiang'}}" class="margin-right" value="wangjiang"></radio>
+      </view>
+      <view class="cu-form-group">
+        <view class="title margin-left">江安校区</view>
+        <radio checked="{{campus=='jiangan'}}" class="margin-right" value="jiangan"></radio>
+      </view>
+      <view class="cu-form-group ">
+        <view class="title margin-left">华西校区</view>
+        <radio checked="{{campus=='huaxi'}}" class="margin-right" value="huaxi"></radio>
+      </view>
+    </radio-group>
+  </view>
+</scroll-view>
+
+<!-- 抽屉内容 -->
+<view bindtap="hideModal" class="DrawerClose {{modalName=='viewModal'?'show':''}}">
+  <text class="cuIcon-pullright"></text>
+</view>
+<scroll-view scrollY class="DrawerWindow {{modalName=='viewModal'?'show':''}}">
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+    <view bindtap="tabSelect" class="cu-item arrow" data-id="{{index}}" wx:for="{{itemList}}" wx:key="index">
+      <view class="content">
+        <text class="cuIcon-{{item.icon}} text-{{item.color}}"></text>
+        <text class="text-grey">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- https://duomi.chenyipeng.com/static/avatar/ -->
+
+
+<view class="cu-modal show" wx:if="{{modalName=='avatar'}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">头像修改</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="valueContent margin">
+
+    </view>
+  </view>
+</view>
+
+<!-- email修改弹窗 -->
+<view class="cu-modal show" wx:if="{{modalName=='email'}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">邮箱修改</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="valueContent margin">
+      <view class="cu-form-group">
+        <view>邮箱：</view>
+        <input bindinput="emailInput" placeholder="{{user.email?user.email:'空'}}"></input>
+      </view>
+      <view class="cu-form-group" style="display: flex; justify-content: space-between;">
+        <view class="cu-form-group">
+          <view>验证码：</view>
+          <input model:value="{{emailCapctha}}" placeholder="{{emailCapctha}}"></input>
+        </view>
+        <view bindtap="getCaptcha">{{captchaGetting?leftTimes+'秒后可重新获取':'点击获取验证码'}}</view>
+      </view>
+      <view class="flex justify-center margin-top">
+        <button bindtap="updateEmail" class="cu-btn bg-olive">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 昵称修改弹窗 -->
+<view class="cu-modal show" wx:if="{{modalName=='nickname'}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">修改昵称</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="valueContent margin">
+      <view class="cu-form-group">
+        <input bindinput="nicknameInput" placeholder="{{user.nickName?user.nickName:'空'}}"></input>
+      </view>
+      <view class="flex justify-center margin-top">
+        <button bindtap="hideModal" class="cu-btn bg-olive">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 性别修改弹窗 -->
+<view bindtap="hideModal" class="cu-modal {{modalName=='genderChoose'?'show':''}}">
+  <view class="cu-dialog">
+    <radio-group bindchange="chooseGender" class="block">
+      <view class="cu-list menu text-left">
+        <view class="cu-item">
+          <label class="flex justify-between align-center flex-sub">
+            <view class="flex-sub">男</view>
+            <radio class="round" value="1"></radio>
+          </label>
+        </view>
+        <view class="cu-item">
+          <label class="flex justify-between align-center flex-sub">
+            <view class="flex-sub">女</view>
+            <radio class="round" value="2"></radio>
+          </label>
+        </view>
+      </view>
+    </radio-group>
+  </view>
+</view>
+
+<!-- 昵称修改弹窗 -->
+<view class="cu-modal show" wx:if="{{modalName=='avatar'}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">选择头像</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="valueContent bg-white">
+      <view style="border-bottom:1px solid #f2f3f4;text-align: left;padding-left: 1rem;font-size: 1.4rem;color: #020304;">♂</view>
+      <view style="display: flex;flex-wrap: wrap;padding-top: 10px;">
+        <view wx:for="{{8}}" wx:key="index">
+          <view bindtap="chooseAvatar" data-gender='boy' data-index="{{index+1}}" class="cu-avatar xl round margin-left" style="background-image:url('https://duomi.chenyipeng.com/static/avatar/boy-{{index+1}}.png');">
+          </view>
+        </view>
+      </view>
+
+      <view style="border-bottom:1px solid #f2f3f4;text-align: left;padding-left: 1rem;font-size: 1.4rem;color: #020304;">♀</view>
+      <view style="display: flex;flex-wrap: wrap;padding: 10px 0;">
+        <view wx:for="{{8}}" wx:key="index">
+          <view bindtap="chooseAvatar" data-gender='girl' data-index="{{index+1}}" class="cu-avatar xl round margin-left" style="background-image:url('https://duomi.chenyipeng.com/static/avatar/girl-{{index+1}}.png');">
+          </view>
+        </view>
+      </view>
+
+      <view class="padding">
+        <button bindchooseavatar="chooseAvatar" data-type='2' open-type="chooseAvatar" class="cu-btn bg-blue">手动选择头像上传</button>
+      </view>
+
+    </view>
+  </view>
+</view>
+<wxs module="tools" src="setting.wxs" />

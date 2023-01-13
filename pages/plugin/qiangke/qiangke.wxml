@@ -1,0 +1,55 @@
+<view bindtap="showModal" class="add_button bg-gradual-purple" data-target="add">
+    <view class="cuIcon-add lg"></view>
+</view>
+<view class="padding-sm">
+    <view class="flex solid-bottom align-center radius shadow bg-gradual-purple margin-top-sm" style="padding:0.8rem 0">
+        <text class="item">抢课列表</text>
+    </view>
+    <view wx:if="{{list.length>0}}">
+        <view class="cu-list menu-avatar">
+            <view class="cu-item" wx:for="{{list}}" wx:key="index">
+                <view class="cu-avatar radius lg" style="background-image:url({{item.user.avatarUrl}});"></view>
+                <view class="content" style="width: 100%;">
+                    <view class="text-pink">
+                        <text class="text-cut">{{item.user.nickName}}</text>
+                    </view>
+                    <view class="text-gray text-sm flex">
+                        <text class="text-cut">正在抢{{item.kch}}，已刷新{{item.count}}次。</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view wx:else>
+        <view class="solid-bottom padding text-center radius shadow bg-white">
+            <view>暂时无人抢课</view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{modalName=='add'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">添加抢课</view>
+            <view bindtap="hideModal" class="action">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <view class="padding-top padding-bottom">
+            <form>
+                <view class="cu-form-group margin-top">
+                    <input model:value="{{form_username}}" name="username" placeholder="学号"></input>
+                </view>
+                <view class="cu-form-group">
+                    <input model:value="{{form_password}}" name="password" placeholder="密码" type="password"></input>
+                </view>
+                <view class="cu-form-group">
+                    <input model:value="{{form_kch}}" name="kch" placeholder="课程号"></input>
+                </view>
+                <view class="cu-form-group">
+                    <input model:value="{{form_kxh}}" name="kxh" placeholder="课序号"></input>
+                </view>
+                <button bindtap="add" class="cu-btn bg-blue" style="margin-top:20rpx">提交</button>
+            </form>
+        </view>
+    </view>
+</view>

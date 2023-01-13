@@ -1,0 +1,190 @@
+<wxs module="tools" src="/utils/utils.wxs"></wxs>
+<view class="title_bar bg-white padding-lr">
+  <view class="flex align-center">
+    <view class="flex align-center flex-sub justify-center">
+      <view class="text-lg text-gray  cuIcon-search margin-right-xs"></view>
+      <view>
+        <picker bindchange="tjChange" class="text-lg text-grey" mode="selector" range="{{range}}">{{range[tjIndex]}}</picker>
+      </view>
+    </view>
+    <view class="cu-bar search bg-white flex-treble" style="width: 64%;">
+      <view class="search-form round">
+        <text class="cuIcon-search"></text>
+        <input bindconfirm="search" confirmType="search" model:value="{{searchValue}}" type="text"></input>
+      </view>
+      <view class="action">
+        <button bindtap="search" class="cu-btn bg-mauve shadow-blur round">搜索</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="bg-white" style="padding-top: 120rpx;">
+  <view wx:for="{{list}}" wx:for-item="item0" wx:key="index">
+    <view bindtap="toDetail" class="item bg-white" data-kid="{{item.kid}}" wx:for="{{item0}}" wx:key="index">
+      <view class="padding-lr-xl padding-tb-sm">
+        <view class="flex justify-between">
+          <view class="text-bold text-lg">{{item.kname}}</view>
+          <view class="text-grey text-lg" style="max-width: 100rpx;overflow:hidden;max-height: 52rpx;">{{item.tname}}</view>
+        </view>
+        <view class="flex margin-top-sm">
+          <view class="flex-sub text-grey">课程号：{{item.kch}}</view>
+          <view class="flex-sub text-grey">课序号：{{item.kxh}}</view>
+        </view>
+        <view class="flex margin-top-sm">
+          <view class="flex-sub text-grey">考试类别：{{item.examTypeName}}</view>
+          <view class="flex-sub text-grey">学分：{{item.credit}}</view>
+        </view>
+      </view>
+      <view class="divLine margin-tb-xs">
+        <view class="line"></view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-load  {{end?'over':isGetting?'loading':''}}"></view>
+</view>
+
+
+<view bindtap="closeShade" class="shade-container flex justify-center align-end animation-slide-bottom" hidden="{{!show}}">
+  <view catchtap="donothing" class="result-card">
+    <scroll-view scrollY="true" style="height:100%;">
+      <view class="padding-lr padding-tb">
+        <view class="text-center margin-tb-sm text-bold text-xl">{{mainItem.kname}}</view>
+        <view class="container radius shadow-warp bg-white light padding-tb  padding-lr-xl margin-bottom flex flex-direction">
+          <view class="margin-top-xs">
+            <text class="text-grey">教师：</text>
+            <text>{{mainItem.tname}}</text>
+          </view>
+          <view class="flex margin-top-xs">
+            <view class="flex-sub">
+              <text class="text-grey">课程号：</text>
+              <text>{{mainItem.kch}}</text>
+            </view>
+            <view class="flex-sub">
+              <text class="text-grey">课序号：</text>
+              <text>{{mainItem.kxh}}</text>
+            </view>
+          </view>
+          <view class="flex margin-top-xs">
+            <view class="flex-sub">
+              <text class="text-grey">学分：</text>
+              <text>{{mainItem.credit}}</text>
+            </view>
+            <view class="flex-sub">
+              <text class="text-grey">考试类型：</text>
+              <text>{{mainItem.examTypeName}}</text>
+            </view>
+          </view>
+          <view class="flex margin-top-xs">
+            <view class="flex-sub">
+              <text class="text-grey">最高分：</text>
+              <text>{{mainItem.max}}</text>
+            </view>
+            <view class="flex-sub">
+              <text class="text-grey">最低分：</text>
+              <text>{{mainItem.min}}</text>
+            </view>
+          </view>
+          <view class="flex margin-top-xs">
+            <view class="flex-sub">
+              <text class="text-grey">统计人数：</text>
+              <text>{{mainItem.count}}</text>
+            </view>
+            <view class="flex-sub">
+              <text class="text-grey">平均分：</text>
+              <text>{{tools.calGrade(mainItem.avg)}}</text>
+            </view>
+          </view>
+          <view class="margin-top-sm">
+            <text class="text-grey">开设校区：</text>
+            <text>{{mainItem.campusName}}</text>
+          </view>
+          <view class="margin-top-sm">
+            <text class="text-grey">课程类别：</text>
+            <text>{{mainItem.courseCategoryName}}</text>
+          </view>
+          <view class="margin-top-xs">
+            <text class="text-grey">选课限制：</text>
+            <text>{{mainItem.restrictedCondition}}</text>
+          </view>
+        </view>
+        <view class="container radius shadow-warp bg-white light padding-tb margin-bottom ">
+          <view class="text-xl text-bold text-center">成绩分布</view>
+          <view class="text-grey text-center">共统计了{{mainItem.count}}位学生的成绩信息</view>
+          <!-- 饼图 -->
+          <view class="charts" style="margin-top: -40rpx;">
+            <ec-canvas canvasId="mychart-bar" class="ec-canvas" ec="{{ec2}}" id="mychart-dom-bar" style="z-index:1;"></ec-canvas>
+          </view>
+
+          <view class="text-xl text-bold text-center margin-top-xl">历年成绩变化</view>
+          <!-- 折线图 -->
+          <view class="charts" style="margin-top: -40rpx;">
+            <ec-canvas canvasId="mychart-bar" class="ec-canvas" ec="{{ec2}}" id="zx-chart" style="z-index:1;"></ec-canvas>
+          </view>
+          <view class="text-grey padding-lr-xl margin-top-sm"> 　　所展示的成绩信息数据仅来自部分用户，数据仅供参考使用，无法准确反应老师真实给分及教学情况，请酌情判断。 </view>
+        </view>
+
+        <view class="container radius shadow-warp bg-white light padding-tb margin-bottom-xl">
+          <view class="text-center text-bold text-xl" style="position: relative;display: flex;align-items: center;justify-content: center;">
+            评价
+            <button wx:if="{{showbtn}}" bindtap="evalShow" style="position: absolute;right: 1rem;" class="cu-btn bg-green sm">评价课程</button>
+          </view>
+          <view wx:for="{{commentList}}" wx:key="index" style="margin: 10rpx 20rpx;">
+            <view class="avatarAndNickname" style="display: flex;border-bottom: 1rpx solid lightgrey;">
+              <image style="height: 2.8rem;width: 2.8rem;border-radius: 1.4rem;overflow: hidden;" src="{{item.creator.avatarUrl}}"></image>
+              <view style="margin-left:20rpx;width: 100%;">
+                <view style="display: flex;justify-content: space-between;width: 100%;padding-right: 20rpx;">
+                  <view>
+                    <view style="font-size: 0.9rem;color: black;">{{item.creator.nickName}}</view>
+                    <view style="font-size: 0.7rem;color: grey;">{{tools.calTime(item.date)}}</view>
+                  </view>
+                  <view bindtap="showActionSheet" data-id="{{item.cid}}" data-ismine="{{user.uid==item.creator.uid}}" class="cuIcon-more" style="font-size: 1rem;"></view>
+                </view>
+
+                <view class="content" style="padding: 0 20rpx 10rpx 20rpx;font-size: 1rem;">
+                  {{item.content}}
+                </view>
+              </view>
+            </view>
+
+          </view>
+
+          <view style="text-align: center;font-size: 0.8rem;color: grey;">没有了o(*￣︶￣*)o</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+<view class="shade-layer" wx:if="{{show}}"></view>
+<view class="cu-modal  {{modalName=='post'?'show':''}}" wx:if="{{modalName=='post'?true:false}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">评价</view>
+      <view bindtap="hideModal" class="action">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-sm" style="text-align:left">
+      <view class="cu-form-group">
+        <textarea maxlength="-1" model:value="{{EvaContent}}" placeholder="在此输入内容"></textarea>
+      </view>
+      <view class="cu-form-group justify-start">
+        <view>评分：</view>
+        <view>
+          <text catchtap="star" class="cuIcon-favorfill {{tools.judgeStar(index,star)?'text-yellow':''}}" data-index="{{index}}" style="margin-right: 5rpx;font-size: 0.9rem;" wx:for="{{10}}" wx:key="index"></text>
+        </view>
+        <view>（{{star+1}}/10）</view>
+      </view>
+      <!-- <view class="cu-form-group">
+        <checkbox-group bindchange="anonymousCheck" class="margin-left">
+          <checkbox checked="{{anonymous==1?true:false}}" class="round green" value="1"></checkbox>
+          <text class="title">匿名评价课程</text>
+        </checkbox-group>
+      </view> -->
+      <view style="width:100%;text-align:center;margin-top:20rpx;">
+        <button catchtap="eval" class="cu-btn bg-gradual-green" disabled="{{isPosting}}">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+<mp-actionSheet actions="{{groups}}" bindactiontap="btnClick" show="{{showActionsheet}}" title=""></mp-actionSheet>
+<wxs module="tools" src="util.wxs" />

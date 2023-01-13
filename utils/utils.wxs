@@ -1,0 +1,57 @@
+function indexOf(arr, value) {
+  if (arr.indexOf(value) < 0) {
+    return (false)
+  } else {
+    return (true)
+  }
+};
+
+function toFixed(num) {
+  return (num.toFixed(2))
+};
+var calTime = (function (time) {
+  var date = getDate(time);
+  var now = getDate();
+  var cha = getDate().getTime() - time;
+  if (cha < 60000) {
+    return (parseInt(cha / 1000) + "秒前")
+  } else if ((cha < 3600000)) {
+    return (parseInt(cha / 60000) + "分钟前")
+  } else if ((cha < 86400000)) {
+    return (parseInt(cha / 3600000) + "小时前")
+  } else if (date.getFullYear() == now.getFullYear()) {
+    return ((date.getMonth() + 1) + "月" + (date.getDate()) + "日")
+  } else {
+    return (date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + (date.getDate()) + "日")
+  }
+});
+var formatTime = function (date) {
+  date = getDate(date)
+  var now = getDate()
+  return (now.getFullYear() == date.getFullYear() ? '' : (date.getFullYear() + "年")) +
+    (date.getMonth() + 1) + "月" + date.getDate() +
+    " " + date.getHours() + ":" + (date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes())
+}
+
+var getIp = function (ipInfo, info) {
+
+  return ipInfo && ipInfo.province ? ((info ? info : '来自') + (ipInfo.city ? ipInfo.city : ipInfo.province)) : ""
+
+}
+
+var getDateU = function (date) {
+  date = getDate(date)
+  return [date.getFullYear(), date.getMonth() + 1, date.getDate()]
+}
+
+var isIn = function (e, list) {
+  return list.indexOf(e)
+}
+
+module.exports.formatTime = formatTime
+module.exports.getIp = getIp
+module.exports.getDateU = getDateU
+module.exports.isIn = isIn
+module.exports.indexOf = indexOf;
+module.exports.toFixed = toFixed;
+module.exports.calTime = calTime;

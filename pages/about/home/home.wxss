@@ -1,0 +1,54 @@
+.UCenter-bg {
+    align-items: center;
+    background: linear-gradient(180deg,#56ccf2,#2f80ed);
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-weight: 300;
+    height: 550rpx;
+    justify-content: center;
+    overflow: hidden;
+    padding-top: 40rpx;
+    position: relative;
+    text-shadow: 0 0 3px rgba(0,0,0,.3);
+}
+
+.setting {
+    font-size: 1.5rem;
+    position: absolute;
+    right: 20rpx;
+    top: 20rpx;
+}
+
+.UCenter-bg text {
+    opacity: .8;
+}
+
+.UCenter-bg image {
+    height: 200rpx;
+    width: 200rpx;
+}
+
+.UCenter-bg .gif-wave {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.mapBox,.UCenter-bg .gif-wave,map {
+    height: 100rpx;
+    left: 0;
+    mix-blend-mode: screen;
+    z-index: 99;
+}
+
+.mapBox,map {
+    height: 300rpx;
+    width: 750rpx;
+}
+
+.xxl{
+  width: 180rpx;
+  height: 180rpx;
+}
