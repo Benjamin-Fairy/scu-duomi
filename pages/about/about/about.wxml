@@ -1,11 +1,21 @@
 <view class="margin-xl bg-white padding-xl radius shadow-lg">
-    <view class="text-center margin-bottom text-lg  text-grey">关于此小程序</view>
-    <view class="text-content">
-        <view></view>
-        <view class="margin-top-sm"></view>
-        <view class="margin-top-sm">一个不知名的小程序</view>
-        <view class="margin-top-sm"></view>
-        <view class="margin-top-sm" style="width: 100%;text-align: center;">(๑❛ᴗ❛๑)۶</view>
-        <view class="margin-top-sm" style="width: 100%;text-align: center;">更多功能敬请期待！</view>
-    </view>
+  <view class="text-center margin-bottom text-lg  text-grey">关于此小程序</view>
+  <view class="text-content">
+    <view></view>
+    <view class="margin-top-sm"></view>
+    <text>
+    “让我来朵蜜你吧”一个个人的开源小程序项目，这个小程序是为了方便一些学校的功能，为大家提供便捷的服务。
+    </text>
+
+    <text>
+    目前我已经毕业，后续对于该小程序的进一步开发和维护可能会存在一些问题，如果你有兴趣加入该小程序的开发运营当中，欢迎你通过“客服”功能联系我。
+
+    </text>
+    <text style="font-weight: bold;">项目开源地址： </text>
+    
+    <text>https://github.com/cyp199911/scu-duomi</text>
+    <view class="margin-top-sm"></view>
+    <view class="margin-top-sm" style="width: 100%;text-align: center;">(๑❛ᴗ❛๑)۶</view>
+    <view class="margin-top-sm" style="width: 100%;text-align: center;">更多功能敬请期待！</view>
+  </view>
 </view>

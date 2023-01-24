@@ -9,27 +9,8 @@
       <text class="{{item.icon}}"></text>
     </navigator>
   </view>
+  <!-- <view style="background-color: white;">
+    <navigator url="/pages/register/register">dsadsadsa</navigator>
+  </view> -->
   <view class="cu-tabbar-height" style="margin-bottom: 40px;"></view>
 </scroll-view>
-<view class="cu-modal {{modalName=='xieyi'?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
-      <view class="content">川大IN使用协议</view>
-    </view>
-    <view class="padding-xl padding-left-xl">
-      <scroll-view bindscroll="scroll" enhanced="true" id="xieyi-scroll" scrollY="true" style="height:50vh;text-align:left;">
-        <text space="nbsp">{{xieyi}}</text>
-      </scroll-view>
-      <view class="margin-top" style="text-align:left;">
-        <checkbox-group bindchange="readCheck">
-          <checkbox checked="{{readCheck==1?true:false}}" class="round green" value="1"></checkbox>
-          <text class="title" space="nbsp"> 我已详细阅读并同意协议提及的所有内容</text>
-        </checkbox-group>
-      </view>
-      <view class="margin-top-xs">
-        <button bindtap="xieyiConfirm" class="cu-btn bg-green">确认</button>
-      </view>
-    </view>
-  </view>
-</view>
-<mp-half-screen-dialog bindbuttontap="buttontap" buttons="{{buttons}}" desc="{{now}}" maskClosable="{{true}}" show="{{show}}" subTitle="服务器提示消息" tips="{{msg}}" title="提示"></mp-half-screen-dialog>

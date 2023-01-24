@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "home": "/pages/home/home/home",
+    "square": "/pages/square/square",
+    "kebiao": "/pages/curriculum/curriculum",
+    "me": "/pages/about/home/home"
+  }
+}

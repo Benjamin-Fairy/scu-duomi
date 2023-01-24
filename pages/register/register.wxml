@@ -30,11 +30,28 @@
     <view style="flex: 1;">性别</view>
     <view style="flex: 3;">
       <radio-group bindchange="radioChange">
-        <radio value="1"></radio> 男
-        <radio value="2"></radio> 女
+        <radio value="1" checked="{{gender==1}}"></radio> 男
+        <radio value="2" checked="{{gender==2}}"></radio> 女
       </radio-group>
     </view>
   </view>
+
+  <!-- 性别 -->
+  <view class="user_info_item ">
+    <view style="color: lightblue;" bindtap="showXieyi">
+      《用户隐私及使用协议》
+    </view>
+    <view class="flex" style="align-items: center;">
+      <view>我已详细阅读并同意协议提及的所有内容</view>
+      <checkbox-group bindchange="xieyiChange">
+        <checkbox class="round green" style="margin-left: 24rpx;" value="1"></checkbox>
+      </checkbox-group>
+    </view>
+
+  </view>
+
+
+
 
   <!-- 确认按钮 -->
   <view class="user_info_item flex justify-center">
@@ -70,6 +87,22 @@
 
       <view style="padding:10px 0;font-size: 0.8rem;">后续可以在个人界面，手动上传头像修改~</view>
 
+    </view>
+  </view>
+</view>
+
+<view class="cu-modal {{modalName=='xieyi'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">小程序使用协议</view>
+    </view>
+    <view class="padding-xl padding-left-xl">
+      <scroll-view enhanced="true" id="xieyi-scroll" scrollY="true" style="height:50vh;text-align:left;">
+        <text space="nbsp">{{xieyi}}</text>
+      </scroll-view>
+      <view class="margin-top-xs">
+        <button bindtap="hideModal" class="cu-btn bg-green">确认</button>
+      </view>
     </view>
   </view>
 </view>

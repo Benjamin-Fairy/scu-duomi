@@ -1,16 +1,10 @@
 <wxs module="tools" src="/utils/utils.wxs"></wxs>
+<cu-custom bgColor="bg-white" isCustom="{{true}}"><view slot="content">广场 </view></cu-custom>
 
 <view class="body">
 
-
   <!-- 主体内容 -->
   <view>
-    <scrollSquarePage showSkeleton="{{true}}" id="scrollSquarePage"></scrollSquarePage>
+    <button bindtap="open"> 点击查看</button>
   </view>
-
-  <view bindtap="add" class="bg-green" style="height: 3rem;width: 3rem;position: fixed;bottom: 4rem;left: 45%;border-radius: 3rem;display: flex;justify-content: center;align-items: center;font-size: 2.6rem;">
-    <view class="cuIcon-add"></view>
-  </view>
-
-
 </view>

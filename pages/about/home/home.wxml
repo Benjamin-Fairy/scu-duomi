@@ -5,10 +5,17 @@
     </view>
     <button bindtap="getUserInfo" style="font-size:0.8rem;margin-top:1rem">点此登录</button>
   </view>
+
   <view class="UCenter-bg" wx:else>
-    <view bindtap="goToSetting" class="cu-avatar xxl round margin-left" style="background-image:url({{userInfo.avatarUrl}});"></view>
-    <view class="text-xl margin-top-sm"> {{userInfo.nickName}} </view>
+
+    <view bindtap="goToSetting" class="cu-avatar xxl round margin-left" style="background-image:url({{userInfo.avatarUrl}});z-index: 999;"></view>
+    <view class="text-xl margin-top-sm" style="z-index: 999;"> {{userInfo.nickName}} </view>
+    <view style="position: absolute;z-index: 1;width: 100%;height: 100%;">
+      <video src="https://chenyipeng.com/bg.mp4" style="height: 100%;width:100%;" object-fit="cover" autoplay muted controls='{{false}}' />
+    </view>
   </view>
+
+
   <view class="cu-list menu card-menu margin-top margin-bottom-xl shadow-lg radius">
     <view class="cu-item arrow">
       <navigator class="content" hoverClass="none" url="/pages/about/setting/setting">
@@ -41,7 +48,7 @@
         <text class="text-grey">客服</text>
       </button>
     </view>
-  
+
   </view>
   <view style="text-align: center;">{{accountInfo.miniProgram.version}}</view>
   <view class="cu-tabbar-height"></view>

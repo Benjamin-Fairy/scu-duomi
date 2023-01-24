@@ -35,7 +35,18 @@ var formatTime = function (date) {
 
 var getIp = function (ipInfo, info) {
 
-  return ipInfo && ipInfo.province ? ((info ? info : '来自') + (ipInfo.city ? ipInfo.city : ipInfo.province)) : ""
+  if (!ipInfo) {
+    return ""
+  }
+  if (ipInfo.city) {
+    return ipInfo.city
+  } else if (ipInfo.province) {
+    return ipInfo.province
+  } else if (ipInfo.country) {
+    return ipInfo.country
+  } else {
+    return ""
+  }
 
 }
 

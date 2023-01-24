@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/home/home/home",
     "pages/home/Grade/Grade",
     "pages/home/login/login",
@@ -27,47 +28,12 @@
     "navigationBarTextStyle": "black",
     "backgroundColor": "#F1F1F1"
   },
-  "tabBar": {
-    "color": "#8a8a8a",
-    "list": [
-      {
-        "text": "广场",
-        "pagePath": "pages/square/square",
-        "iconPath": "images/tabbar/square.png",
-        "selectedIconPath": "images/tabbar/square_selected.png"
-      },
-      {
-        "text": "课表",
-        "pagePath": "pages/curriculum/curriculum",
-        "iconPath": "images/tabbar/curriculum.png",
-        "selectedIconPath": "images/tabbar/curriculum_selected.png"
-      },
-      {
-        "text": "首页",
-        "pagePath": "pages/home/home/home",
-        "iconPath": "images/tabbar/function.png",
-        "selectedIconPath": "images/tabbar/function_selected.png"
-      },
-      {
-        "text": "我",
-        "pagePath": "pages/about/home/home",
-        "iconPath": "images/tabbar/me.png",
-        "selectedIconPath": "images/tabbar/me_selected.png"
-      }
-    ]
-  },
   "useExtendedLib": {
     "kbone": true,
     "weui": true
   },
-  "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "van-image": "@vant/weapp/image/index",
-    "van-icon": "@vant/weapp/icon/index",
-    "van-grid": "@vant/weapp/grid/index",
-    "van-grid-item": "@vant/weapp/grid-item/index",
-    "van-skeleton": "@vant/weapp/skeleton/index",
-    "van-loading": "@vant/weapp/loading/index",
-    "van-button": "@vant/weapp/button/index"
-  }
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
 }

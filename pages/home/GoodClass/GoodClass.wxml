@@ -123,7 +123,7 @@
           <view class="text-grey padding-lr-xl margin-top-sm"> 　　所展示的成绩信息数据仅来自部分用户，数据仅供参考使用，无法准确反应老师真实给分及教学情况，请酌情判断。 </view>
         </view>
 
-        <view class="container radius shadow-warp bg-white light padding-tb margin-bottom-xl">
+        <view class="container radius shadow-warp bg-white light padding-tb margin-bottom-xl" wx:if="{{pj}}">
           <view class="text-center text-bold text-xl" style="position: relative;display: flex;align-items: center;justify-content: center;">
             评价
             <button wx:if="{{showbtn}}" bindtap="evalShow" style="position: absolute;right: 1rem;" class="cu-btn bg-green sm">评价课程</button>

@@ -1,0 +1,66 @@
+<!-- <view hidden="{{active!='square'}}">
+  <square></square>
+</view> -->
+<view hidden="{{active!='curriculum'}}">
+  <kebiao></kebiao>
+</view>
+<view hidden="{{active!='home'}}">
+  <home></home>
+</view>
+<view>
+  <me wx:if="{{active=='me'}}"></me>
+</view>
+<!-- 导航栏 -->
+<view>
+  <view class="cu-bar tabbar bg-white shadow foot" style="padding-bottom: {{safeBottom}}px;height:calc(100rpx + {{safeBottom}}px)">
+    <view class="action" bindtap="open" data-cur="square">
+      <view class='cuIcon-cu-image'>
+        <image src="/images/tabbar/square{{active=='square'?'_selected':''}}.png"></image>
+      </view>
+      <view class="{{active=='square'?'text-green':'text-gray'}}">广场</view>
+    </view>
+    <view class="action" bindtap="NavChange" data-cur="curriculum">
+      <view class='cuIcon-cu-image'>
+        <image src="/images/tabbar/curriculum{{active=='curriculum'?'_selected':''}}.png"></image>
+      </view>
+      <view class="{{active=='curriculum'?'text-green':'text-gray'}}">课表</view>
+    </view>
+    <view class="action" bindtap="NavChange" data-cur="home">
+      <view class='cuIcon-cu-image'>
+        <image src="/images/tabbar/home{{active=='home'?'_selected':''}}.png"></image>
+      </view>
+      <view class="{{active=='home'?'text-green':'text-gray'}}">主页</view>
+    </view>
+    <view class="action" bindtap="NavChange" data-cur="me">
+      <view class='cuIcon-cu-image'>
+        <image src="/images/tabbar/me{{active=='me'?'_selected':''}}.png"></image>
+      </view>
+      <view class="{{active=='me'?'text-green':'text-gray'}}">我</view>
+    </view>
+  </view>
+</view>
+
+<view class="cu-modal" wx:if="{{modalName=='xieyi'}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">小程序使用协议</view>
+    </view>
+    <view class="padding-xl padding-left-xl">
+      <scroll-view bindscroll="scroll" enhanced="true" id="xieyi-scroll" scrollY="true" style="height:50vh;text-align:left;">
+        <text space="nbsp">{{xieyi}}</text>
+      </scroll-view>
+      <view class="margin-top" style="text-align:left;">
+        <checkbox-group bindchange="readCheck">
+          <checkbox checked="{{readCheck==1?true:false}}" class="round green" value="1"></checkbox>
+          <text class="title" space="nbsp"> 我已详细阅读并同意协议提及的所有内容</text>
+        </checkbox-group>
+      </view>
+      <view class="margin-top-xs">
+        <button bindtap="xieyiConfirm" class="cu-btn bg-green">确认</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<mp-half-screen-dialog bindbuttontap="buttontap" buttons="{{buttons}}" desc="{{now}}" maskClosable="{{true}}" show="{{show}}" subTitle="服务器提示消息" tips="{{msg}}" title="提示"></mp-half-screen-dialog>

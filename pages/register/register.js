@@ -1,17 +1,36 @@
 // pages/register/register.js
 const app = getApp()
 const nameArray = require('./name').nameArray
+const xieyi = require('../index/xieyi').xieyi
 Page({
 
   data: {
-    avatarUrl: 'http://duomi.chenyipeng.com/static/avatar/boy-1.png',
+    avatarUrl: '',
     modalName: '',
     nickName: '',
-    gender: '0'
+    gender: '0',
+    xieyi: xieyi
   },
 
   onLoad() {
     this.getNickName()
+    let gender = Math.floor(Math.random() * 2) + 1
+    this.setData({
+      avatarUrl: "https://duomi.chenyipeng.com/static/avatar/" + (gender == 2 ? "girl" : "boy") + "-" + (Math.floor(Math.random() * 8) + 1) + '.png',
+      gender: gender
+    })
+  },
+  xieyiChange(e) {
+    0 == e.detail.value.length ? this.setData({
+      readCheck: 0
+    }) : this.setData({
+      readCheck: 1
+    });
+  },
+  showXieyi() {
+    this.setData({
+      modalName: 'xieyi'
+    })
   },
 
   getNickName() {
@@ -21,11 +40,17 @@ Page({
       nickName: headName + foodName
     })
   },
-
   confirm() {
     let avatarUrl = this.data.avatarUrl
     let gender = this.data.gender
     let nickName = this.data.nickName
+    if (!this.data.readCheck) {
+      wx.showToast({
+        title: '请先同意隐私和使用条款',
+        icon: 'none'
+      })
+      return
+    }
     if (nickName.trim() == '') {
       wx.showToast({
         title: '请输入昵称',

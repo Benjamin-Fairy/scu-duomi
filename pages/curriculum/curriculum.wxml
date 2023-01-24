@@ -1,19 +1,22 @@
+<cu-custom bgColor="bg-white" isCustom="{{true}}">
+  <view slot="content">课表 </view>
+</cu-custom>
+
 <view bindtap="showSelectWeek" class="weekPicker" data-target="start">
   <view class="picker"> {{weekNow!=''&&weekNow&&weekNow>-1||weekNow==0?'第'+(weekNow+1)+'周':'非行课'}} </view>
 </view>
 
-<view bindtap="addWeek" class="cuIcon-fold" style="position:fixed;right:2rem;bottom:7rem;z-index:9999;font-size:1.4rem;z-index:9"></view>
-<view bindtap="subWeek" class="cuIcon-unfold" style="position:fixed;right:2rem;bottom:2.15rem;z-index:9999;font-size:1.4rem;z-index:9"></view>
+<view bindtap="addWeek" class="cuIcon-fold" style="position:fixed;right:2rem;bottom:calc(15vh  + 3rem);z-index:9999;font-size:1.4rem;z-index:9"></view>
+<view bindtap="subWeek" class="cuIcon-unfold" style="position:fixed;right:2rem;bottom:calc(15vh  - 1.85rem);z-index:9999;font-size:1.4rem;z-index:9"></view>
 <view>
   <view class="top">
     <view class="top-text" wx:for="{{['一','二','三','四','五','六','日']}}" wx:key="key">周{{item}}</view>
   </view>
-  <scroll-view bindrefresherrefresh="fresh" class="scroll" refresherEnabled="true" refresherThreshold="200" refresherTriggered="{{trigger}}" scrollY="true">
+  <scroll-view refresher-triggered="{{trigger}}" bindrefresherrefresh="refresh" style="height: calc( 88vh - 60rpx );overflow: auto;" refresher-enabled scroll-y="{{true}}">
     <view style="width:730rpx;display:flex;">
-
       <view class="week-bar" style="margin-top: -100vh;background-color:#c6dfa0;color:#7cba23;position: relative;width: 50rpx;">
         <view style="height: 100vh;display: flex;justify-content: center;align-items: flex-end;">
-          
+
         </view>
         <view class="left padding-tb-xs" style="position: absolute;margin-top: {{index*110}}rpx;height: 110rpx;" wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" wx:key="key">
           <view>{{item}}</view>
@@ -45,6 +48,9 @@
           </view>
         </view>
       </view>
+    </view>
+    <view style="height: 10vh;">
+
     </view>
   </scroll-view>
 </view>

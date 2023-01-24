@@ -142,7 +142,10 @@
     </view>
     <view class="valueContent margin">
       <view class="cu-form-group">
-        <input bindinput="nicknameInput" placeholder="{{user.nickName?user.nickName:'空'}}"></input>
+        <input bindinput="nicknameInput" value="{{user.nickName}}" placeholder="{{user.nickName?user.nickName:'空'}}"></input>
+      </view>
+      <view style="color:grey;text-align:right;margin-top:16rpx;" bindtap="randNickName">
+        随机一个？
       </view>
       <view class="flex justify-center margin-top">
         <button bindtap="hideModal" class="cu-btn bg-olive">确定</button>

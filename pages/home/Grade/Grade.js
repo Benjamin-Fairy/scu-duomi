@@ -20,14 +20,9 @@ Page({
       rank: wx.getStorageSync("rank"),
       modalName: wx.getStorageSync("gradeTongyi") ? "" : "xieyi",
       url: e.globalData.url,
-      jwurl: e.globalData.jwurl
+      jwurl: e.globalData.jwurl,
+      xf: e.globalData.xf,
     })
-    if (e.globalData.jwclogin == false) {
-      e.checkSCULogin()
-      this.setData({
-        flag: true
-      })
-    }
   },
   onShow: function () {
     if (false == e.globalData.jwclogin) {
@@ -110,7 +105,7 @@ Page({
       for (var o = e.data.lnList, c = 0; c < o.length; c++) {
         for (var i = 0, r = 0, s = 0, n = 0, d = 0, l = 0, g = 0; g < o[c].cjList.length; g++) "必修" == o[c].cjList[g].courseAttributeName ? (i += parseFloat(o[c].cjList[g].cj * o[c].cjList[g].credit),
           r += parseFloat(o[c].cjList[g].credit), d += parseFloat(o[c].cjList[g].gradePointScore * o[c].cjList[g].credit)) : (s += parseFloat(o[c].cjList[g].cj * o[c].cjList[g].credit),
-          n += parseFloat(o[c].cjList[g].credit), l += parseFloat(o[c].cjList[g].gradePointScore * o[c].cjList[g].credit));
+            n += parseFloat(o[c].cjList[g].credit), l += parseFloat(o[c].cjList[g].gradePointScore * o[c].cjList[g].credit));
         o[c].bxcj = i, o[c].bxxf = r, o[c].xxcj = s, o[c].xxxf = n, o[c].xxjd = l, o[c].bxjd = d;
       }
       wx.setStorage({
@@ -128,8 +123,8 @@ Page({
       a = wx.createSelectorQuery(),
       o = this;
     if (this.setData({
-        num: e.currentTarget.dataset.num
-      }), "nec" == e.currentTarget.id) a.selectAll(".tr").boundingClientRect(function (e) {
+      num: e.currentTarget.dataset.num
+    }), "nec" == e.currentTarget.id) a.selectAll(".tr").boundingClientRect(function (e) {
       for (var t = o.data.checked, a = 0; a < e.length; a++) "必修" == e[a].dataset.courseattributename && -1 == t.indexOf(e[a].dataset.coursename) && (t += e[a].dataset.coursename);
       o.setData({
         checked: t
@@ -157,12 +152,8 @@ Page({
         modalName: e.currentTarget.dataset.target
       });
     } else {
-      // o.setData({
-      //   modalName: e.currentTarget.dataset.target
-      // })
-      wx.showToast({
-        title: '功能已被教务处封！',
-        icon: 'none'
+      o.setData({
+        modalName: e.currentTarget.dataset.target
       })
     };
     setTimeout(function () {
@@ -230,7 +221,7 @@ Page({
     var o = t.currentTarget.dataset.item,
       c = "zxjxjhh=" + o.id.executiveEducationPlanNumber + "&kch=" + o.id.courseNumber + "&kxh=" + o.id.coureSequenceNumber + "&kssj=" + o.examTime + "&param=" + parseInt(o.scoreEntryModeCode);
     console.log(o), wx.request({
-      url: "https://scujw.chenyipeng.com/scujw/getScoreDetail?" + c,
+      url: e.globalData.jwurl + "student/integratedQuery/scoreQuery/subitemScore/look",
       method: "POST",
       header: {
         cookie: e.globalData.JSESSIONID_SCU
@@ -262,6 +253,32 @@ Page({
         });
       }
     });
+    wx.request({
+      url: a.data.jwurl + "/student/integratedQuery/scoreQuery/thisTermScores/index",
+      header: {
+        cookie: e.globalData.JSESSIONID_SCU
+      },
+      success: function (t) {
+        let c = /scoreQuery\/(.+?)\/thisterm\/coursePropertyScores\/serchScoreDetail/.exec(t.data);
+        wx.request({
+          url: a.data.jwurl + "/student/integratedQuery/scoreQuery/" + c[1] + "/thisterm/coursePropertyScores/serchScoreDetail",
+          header: {
+            cookie: e.globalData.JSESSIONID_SCU
+          },
+          method: 'POST',
+          data: {
+            zxjxjhh: o.id.executiveEducationPlanNumber,
+            kch: o.id.courseNumber,
+            kxh: o.id.coureSequenceNumber,
+            kssj: o.examTime,
+          },
+          dataType: 'json',
+          complete: function (e) {
+            console.log(e.data)
+          }
+        });
+      }
+    })
   },
   tongyi: function () {
     wx.setStorageSync("gradeTongyi", !0), this.hideModal();

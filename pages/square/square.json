@@ -1,8 +1,7 @@
 {
-  "usingComponents": {
-      "scrollSquarePage": "/components/scrollSquarePage/squareScrollPage",
-      "van-skeleton": "@vant/weapp/skeleton/index"
-  },
   "backgroundColor": "#f2f3f4",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  }
 }

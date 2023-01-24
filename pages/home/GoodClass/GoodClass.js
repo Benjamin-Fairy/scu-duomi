@@ -22,6 +22,7 @@ Page({
     searchValue: "",
     user: app.globalData.user,
     showbtn: new Date().getTime() > 1663830764844,
+    pj: false
   },
   search: function (t) {
     wx.showLoading({
@@ -36,9 +37,9 @@ Page({
       kname: this.data.searchValue,
       page: i
     } : {
-      tname: this.data.searchValue,
-      page: i
-    };
+        tname: this.data.searchValue,
+        page: i
+      };
     if ("" != this.data.searchValue.trim()) {
       this.searchGet(e)
     } else {
@@ -175,9 +176,9 @@ Page({
         kname: this.data.searchValue,
         page: i
       } : {
-        tname: this.data.searchValue,
-        page: i
-      };
+          tname: this.data.searchValue,
+          page: i
+        };
       this.searchGet(t);
     } else this.init();
   },
@@ -356,7 +357,7 @@ Page({
               type: 'line',
               smooth: true,
               data: minList,
-            }, ]
+            },]
           }
           console.log(pjList)
           chart.setOption(option);
@@ -477,5 +478,5 @@ Page({
       modalName: null
     });
   },
-  donothing: function () {}
+  donothing: function () { }
 });

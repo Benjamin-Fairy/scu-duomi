@@ -176,7 +176,7 @@ Page({
             img: "data:image/png;base64," + wx.arrayBufferToBase64(e.data),
             captcha: ""
           }), wx.request({
-            url: "https://duomi.chenyipeng.com/captcha/captcha",
+            url: "https://duomi.chenyipeng.com/captcha",
             method: "POST",
             header: {
               "content-type": "application/x-www-form-urlencoded"

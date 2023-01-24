@@ -14,8 +14,9 @@ App({
     limit: 0,
     JSESSIONID_SCU: null,
     completeLogin: false,
-    callback: function () {},
-    jscode: null
+    callback: function () { },
+    jscode: null,
+    xf: false
   },
   jwcLogin: function () {
     let _this = this;
@@ -70,7 +71,8 @@ App({
         success: function (e) {
           ! function (e, a) {
             wx.request({
-              url: "https://duomi.chenyipeng.com/captcha/captcha",
+              url: "https://duomi.chenyipeng.com/captcha",
+              // url: 'http://localhost:5005/captcha',
               method: "POST",
               header: {
                 "content-type": "application/x-www-form-urlencoded"
@@ -80,6 +82,7 @@ App({
                 base64img: e
               },
               success: function (e) {
+                console.log(e.data)
                 if (200 == e.data.code) {
                   var o = e.data.captcha;
                   t(o, a);
@@ -93,6 +96,20 @@ App({
   },
   onLaunch: function () {
     var _this = this;
+    wx.getSystemInfo({
+      success: e => {
+        this.globalData.StatusBar = e.statusBarHeight;
+        let capsule = wx.getMenuButtonBoundingClientRect();
+        this.globalData.safeBottom = e.screenHeight - e.safeArea.bottom
+
+        if (capsule) {
+          this.globalData.Custom = capsule;
+          this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
+        } else {
+          this.globalData.CustomBar = e.statusBarHeight + 50;
+        }
+      }
+    })
     if (wx.canIUse('getUpdateManager')) {
       const updateManager = wx.getUpdateManager()
       //1. 检查小程序是否有新版本发布
@@ -155,7 +172,7 @@ App({
   onError: function (e) {
     console.log(e);
   },
-  onHide: function () {},
+  onHide: function () { },
   Login: function () {
     var e = this;
     wx.login({
@@ -180,6 +197,9 @@ App({
             e.globalData.ticket = t.data.ticket
             if (e.loginReadyCallBack) {
               e.loginReadyCallBack(t)
+            }
+            if (e.loginCallback) {
+              e.loginCallback(t)
             }
           },
           fail: function (t) {
@@ -210,7 +230,7 @@ App({
       method: "GET",
       data: {},
       url: "#",
-      faile: function (e) {},
+      faile: function (e) { },
     };
     for (var a in e) t[a] = e[a];
 
@@ -222,6 +242,13 @@ App({
         })
         return
       }
+      if (res.data.code == 490) {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none'
+        })
+        return
+      }
       e['success'] && e['success'](res)
     }
 
@@ -230,6 +257,13 @@ App({
         wx.showToast({
           title: '权限不足！',
           icon: 'error'
+        })
+        return
+      }
+      if (res.data.code == 490) {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'none'
         })
         return
       }
@@ -252,7 +286,7 @@ App({
   },
   getSession: function (e) {
     let _this = this;
-    e || (e = function () {});
+    e || (e = function () { });
     var t = this;
     wx.request({
       url: _this.globalData.jwurl + "login",
@@ -280,15 +314,24 @@ App({
     });
   },
   checkSCULogin: function () {
-    wx.showToast({
-      title: "请先登录教务处",
-      icon: "none"
+    wx.showModal({
+      title: '提示',
+      content: '该功能需要完成登录才能使用（服务端将不会保存您的密码，仅保存于本地端）',
+      complete: (res) => {
+        if (res.cancel) {
+          wx.showToast({
+            title: '未登录将无法使用！',
+            icon: 'none'
+          })
+        }
+
+        if (res.confirm) {
+          wx.navigateTo({
+            url: "/pages/home/login/login"
+          });
+        }
+      }
     })
-    setTimeout(function () {
-      wx.navigateTo({
-        url: "/pages/home/login/login"
-      });
-    }, 1e3);
   },
   requestPromise: function (e, t) {
     var a = this,

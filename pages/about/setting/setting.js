@@ -1,5 +1,5 @@
 var a = getApp();
-
+const nameArray = require('../../register/name').nameArray
 Page({
   data: {
     url: "",
@@ -198,6 +198,20 @@ Page({
   updateUserInfo: function () {
     var t = this;
     if (t.data.canSubmit) {
+      if (t.data.user.nickName && t.data.user.nickName.trim() == '') {
+        wx.showToast({
+          title: '昵称不能为空',
+          icon: 'none'
+        })
+        return
+      }
+      if (t.data.user.nickName && t.data.user.nickName.trim().length > 10) {
+        wx.showToast({
+          title: '昵称过长，稍微修改下呗',
+          icon: 'none'
+        })
+        return
+      }
       a.request({
         url: t.data.url + "user/update",
         data: {
@@ -231,9 +245,21 @@ Page({
       canSubmit: !0
     });
   },
+  randNickName() {
+    let headName = nameArray.headerName[Math.floor(Math.random() * nameArray.headerName.length)]
+    let foodName = nameArray.foodName[Math.floor(Math.random() * nameArray.foodName.length)]
+    var t = this.data.user;
+    t.nickName = headName + foodName
+     this.setData({
+      nickName: headName + foodName,
+      user: t,
+      canSubmit: !0
+    });
+  },
   nicknameInput: function (a) {
     var t = this.data.user;
-    t.nickName = a.detail.value, this.setData({
+    t.nickName = a.detail.value
+     this.setData({
       nickName: a.detail.value,
       user: t,
       canSubmit: !0

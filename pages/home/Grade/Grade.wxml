@@ -20,6 +20,9 @@
                 <view class="th text-center">学分</view>
                 <view class="th text-center">属性</view>
                 <view class="th text-center">绩点</view>
+                <view wx:if="{{xf}}" class="th text-center" style="flex:2;">
+                  操作
+                </view>
             </view>
         </view>
         <view class="tbody" wx:for="{{score[index].cjList}}" wx:key="key">
@@ -28,7 +31,10 @@
                 <view class="td text-center">{{item.cj}}</view>
                 <view class="td text-center">{{item.credit}}</view>
                 <view class="td text-center">{{item.courseAttributeName}}</view>
-                <view class="td text-center">{{item.gradePointScore}}</view>
+                <view class="td text-center">{{item.gradePointScore<0?'未评教':item.gradePointScore}}</view>
+                <view class="td text-center" style="flex:2" wx:if="{{xf}}">
+                  <button catchtap="getDetail" data-item='{{item}}' class="cu-btn sm bg-cyan" style="width: 80%">查小分</button>
+                </view>
             </view>
         </view>
     </view>
@@ -170,7 +176,7 @@
         </view>
     </view>
 </view>
-<view class="cu-modal {{modalName=='xieyi'?'show':''}}">
+<!-- <view class="cu-modal {{modalName=='xieyi'?'show':''}}">
     <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
             <view class="content">注意</view>
@@ -187,5 +193,5 @@
             </view>
         </view>
     </view>
-</view>
+</view> -->
 <wxs module="tools" src="grade.wxs" />
